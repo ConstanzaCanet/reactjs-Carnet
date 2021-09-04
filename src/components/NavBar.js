@@ -13,7 +13,7 @@ export const NavBar = () => {
             
             </section>
           <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-            <Container>
+            <Container  className='m-2'>
                 <Navbar.Brand href="#home">La librería</Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
@@ -33,7 +33,7 @@ export const NavBar = () => {
                          <FormControl
                           type="search"
                           placeholder="Search"
-                          className="mr-2"
+                          className="mr-0"
                           aria-label="Search"
                           />
                          <Button variant="outline-success">Search</Button>
