@@ -1,7 +1,7 @@
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {Card, ListGroup,ListGroupItem, CardImg} from 'react-bootstrap';
-
+import {Card, ListGroup,ListGroupItem, CardImg,Button} from 'react-bootstrap';
+import buy from './img/buy.png'
 const Cards=(props) =>{
     return(
         <div className='card'>
@@ -15,7 +15,9 @@ const Cards=(props) =>{
                   </Card.Text>
                 </Card.Body>
                 <ListGroup className="list-group-flush">
-                  <ListGroupItem>Cras justo odio</ListGroupItem>
+                  <ListGroupItem>
+                    <Button variant="outline-secondary" onClick={props.adquirir}><img src={buy}/></Button>{' '}
+                  </ListGroupItem>
                 </ListGroup>
                 <Card.Body>
                   <Card.Link href="#">Card Link</Card.Link>

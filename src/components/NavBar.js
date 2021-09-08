@@ -1,6 +1,7 @@
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Navbar,Nav,NavDropdown,Container,Form,FormControl,Button } from 'react-bootstrap';
+import carro from './img/carro.png'
 import logo from './img/book.jpg'
 export const NavBar = () => {
     return (
@@ -31,6 +32,7 @@ export const NavBar = () => {
                           aria-label="Search"
                           />
                          <Button variant="outline-danger">Search</Button>
+                         <Button variant="dark"><img src={carro}/></Button>{' '}
                         </Form>
                       
                      </Nav>
