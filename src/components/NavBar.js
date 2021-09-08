@@ -1,20 +1,14 @@
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Navbar,Nav,NavDropdown,Container,Form,FormControl,Button } from 'react-bootstrap';
-
+import logo from './img/book.jpg'
 export const NavBar = () => {
     return (
         <div>
-            <section className='portada'>
-                <div className='content'>
-                    <h2>La librería!</h2>
-                    <p>Lee los buenos libros primero; lo más seguro es que no alcances a leerlos todos.</p>
-                </div>
-            
-            </section>
+
           <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
             <Container  className='m-2'>
-                <Navbar.Brand href="#home">La librería</Navbar.Brand>
+                <Navbar.Brand href="#home"><img title='read' alt='book' className='logo'  src={logo}/></Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="me-auto">
@@ -43,6 +37,13 @@ export const NavBar = () => {
                 </Navbar.Collapse>
             </Container>
         </Navbar>
+
+        <section className='portada'>
+                <div className='content'>
+                    <h2>La librería!</h2>
+                    <p>Lee los buenos libros primero; lo más seguro es que no alcances a leerlos todos.</p>
+                </div>
+            </section>
         </div>
     )
 }
