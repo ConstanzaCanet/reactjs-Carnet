@@ -9,7 +9,7 @@ import libro3 from './components/img/libro3.png'
 
 
 function App() {
-  const sumar=()=>{
+  const sumar=(name)=>{
       // carrito-localstorage
       let carritoList = JSON.parse(localStorage.getItem("compra"));
       // Si no fue creado, genero carrito
@@ -18,9 +18,9 @@ function App() {
           localStorage.setItem('compra', JSON.stringify(carritoList));
       }
         //agrego producto al carrito y muestro señal
-        carritoList.push(this);
+        carritoList.push(name);
         localStorage.setItem('compra', JSON.stringify(carritoList));
-        alert(`adquiriste producto`)
+        alert(`adquiriste el producto ${name}`)
   };
   return (
     <div>
