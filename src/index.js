@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import NavBar from './components/NavBar';
+
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Cards from './components/Cards'
 

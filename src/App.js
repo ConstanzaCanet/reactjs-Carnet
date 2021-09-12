@@ -2,6 +2,8 @@ import * as React from 'react';
 import './App.css';
 import Cards from './components/Cards';
 import NavBar from './components/NavBar';
+import Header from './components/Header';
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import libro1 from './components/img/libro2.jpg'
 import libro2 from './components/img/images.png'
@@ -26,6 +28,7 @@ function App() {
     <div>
 
     <NavBar />
+    <Header />
 
       <div className='divCard'>
         <Cards name='Libro cero' src={libro1} adquirir={sumar}/>
