@@ -41,9 +41,20 @@ body{
 /*Cards*/
 .card{
     margin-top: 5%;
+    align-items: center;
 }
 .divCard{
     display: flex;
     justify-content: space-between;
     margin: 5%;
+}
+
+/*ITEM COUNT EN CARDS*/
+.itemCount{
+    color: white;
+    margin-top:3px ;
+}
+.buttCoutn{
+    display: flex;
+    justify-content: space-between; 
 }

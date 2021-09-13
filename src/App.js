@@ -12,6 +12,7 @@ import libro3 from './components/img/libro3.png'
 
 function App() {
   const sumar=(name)=>{
+    
       // carrito-localstorage
       let carritoList = JSON.parse(localStorage.getItem("compra"));
       // Si no fue creado, genero carrito

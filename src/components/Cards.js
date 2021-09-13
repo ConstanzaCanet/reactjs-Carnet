@@ -1,8 +1,11 @@
 import '../App.css';
+import ItemCount from './ItemCount';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {Card, ListGroup,ListGroupItem, CardImg,Button} from 'react-bootstrap';
-import buy from './img/buy.png'
-const Cards=({name,src,adquirir}) =>{
+import {Card} from 'react-bootstrap';
+
+
+
+const Cards=({name,src}) =>{
     return(
         <div className='card'>
             <Card style={{ width: '18rem' }}>
@@ -14,15 +17,9 @@ const Cards=({name,src,adquirir}) =>{
                     the card's content.
                   </Card.Text>
                 </Card.Body>
-                <ListGroup className="list-group-flush">
-                  <ListGroupItem>
-                    <Button variant="outline-secondary" onClick={()=> adquirir(name)}><img src={buy}/></Button>{' '}
-                  </ListGroupItem>
-                </ListGroup>
-                <Card.Body>
-                  <Card.Link href="#">Card Link</Card.Link>
-                  <Card.Link href="#">Another Link</Card.Link>
-                </Card.Body>
+
+                <ItemCount />
+
             </Card>
         </div>
     )
