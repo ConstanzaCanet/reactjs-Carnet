@@ -18,7 +18,7 @@ const Cards=({name,src}) =>{
                   </Card.Text>
                 </Card.Body>
 
-                <ItemCount />
+                <ItemCount name={name} />
 
             </Card>
         </div>

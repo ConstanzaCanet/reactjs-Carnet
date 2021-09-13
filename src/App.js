@@ -11,20 +11,7 @@ import libro3 from './components/img/libro3.png'
 
 
 function App() {
-  const sumar=(name)=>{
-    
-      // carrito-localstorage
-      let carritoList = JSON.parse(localStorage.getItem("compra"));
-      // Si no fue creado, genero carrito
-      if (!carritoList) {
-          carritoList = [];
-          localStorage.setItem('compra', JSON.stringify(carritoList));
-      }
-        //agrego producto al carrito y muestro señal
-        carritoList.push(name);
-        localStorage.setItem('compra', JSON.stringify(carritoList));
-        alert(`adquiriste el producto ${name}`)
-  };
+  
   return (
     <div>
 
@@ -32,10 +19,10 @@ function App() {
     <Header />
 
       <div className='divCard'>
-        <Cards name='Libro cero' src={libro1} adquirir={sumar}/>
-        <Cards name='Primer libro' src={libro2} adquirir={sumar}/>
-        <Cards name='Segundo libro'src={libro3} adquirir={sumar}/>
-        <Cards name='Tercer libro'src={libro1} adquirir={sumar}/>
+        <Cards name='Libro cero' src={libro1}/>
+        <Cards name='Primer libro' src={libro2}/>
+        <Cards name='Segundo libro'src={libro3}/>
+        <Cards name='Tercer libro'src={libro1}/>
       </div>
     </div>
   );
