@@ -51,7 +51,9 @@ function ItemCount({name}) {
         //Funcion que llevara a cabo el guardado del objeto en el carrito
          const onClickFinish=(name,amount)=>{
             if (amount=== 0) {
-                alert('No hay productos en la canasta!')
+                alert('No hay productos en la canasta! No es posible realizar la compra')
+                setDisp('none');
+                setDispBuy('block');
             }else{
                 // carrito-localstorage
                 let carritoList = JSON.parse(localStorage.getItem("compra"));
