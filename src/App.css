@@ -2,7 +2,9 @@ body{
     margin: 0;
     padding: 0;
 }
-
+.spinner{
+    margin-top: 15%;
+}
 .portada{
     position: relative;
     width:100%;
@@ -40,11 +42,14 @@ body{
 
 /*Cards*/
 .card{
-    margin-top: 5%;
+    margin-top: 3%;
     align-items: center;
+    margin-bottom: 3%; 
 }
 .divCard{
+    margin: auto;
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     margin: 5%;
 }
