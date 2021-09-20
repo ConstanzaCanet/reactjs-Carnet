@@ -5,15 +5,24 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 const CardContainers = () =>{
-  React.useEffect(()=>{
-    const urlAll= 'https://www.etnassoft.com/api/v1/get/?get_categories=all'; 
-    
-    fetch(urlAll).then((resp) => resp.json())
-    .then((books) => console.log(books))
-    .catch(error => console.log('libros no encontrados...'))
-     });
+    const [libros , setLibros] = React.useState([]);
 
-  return(
+    React.useEffect(()=>{
+        const urlAll= 'https://www.etnassoft.com/api/v1/get/?get_categories=all'; 
+    
+        fetch(urlAll)
+        .then((resp) =>{
+         if (resp.ok) {
+                return resp.json();
+            }else{
+                 throw resp;
+            }
+        })
+        .then((books)=> setLibros(books))
+        .catch((error) => console.log('libro inexistente'))
+         },[]);
+
+    return(
       <div className='divCard'>
          
       </div>
