@@ -53,6 +53,12 @@ body{
     justify-content: space-between;
     margin: 5%;
 }
+.CardTitu{
+    background-color: rgb(129, 163, 255);
+    color: rgb(0, 0, 0);
+    width: 18rem;
+    font-size:medium;
+}
 
 /*ITEM COUNT EN CARDS*/
 .itemCount{

@@ -5,16 +5,16 @@ import {Card} from 'react-bootstrap';
 
 
 
-const Cards=({name,src}) =>{
+const Cards=({name,src,author,id,content}) =>{
     return(
         <div className='card'>
             <Card style={{ width: '18rem' }}>
-                <Card.Img variant="top" alt='books' src={src} />
+                <Card.Img variant="top" alt={id} src={src} />
                 <Card.Body>
-                  <Card.Title>{name}</Card.Title>
+                  <Card.Title className='CardTitu'>{name}</Card.Title>
                   <Card.Text>
-                    Some quick example text to build on the card title and make up the bulk of
-                    the card's content.
+                    {content}
+                    Autor: {author}
                   </Card.Text>
                 </Card.Body>
 
