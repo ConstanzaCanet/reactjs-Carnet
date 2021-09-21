@@ -27,14 +27,14 @@ const CardContainers = () =>{
     return(
       <div className='divCard'>
          {libros?.map(libro=> {
-             return <article>
-                        {libro.name}
+             return <article key={libro.category_id}>
                         <Cards 
                              id={libro.category_id}
                              src={libro.cover}
                              name={libro.title}
                              author={libro.author}
-                             content={libro.content_short}/>
+                             content={libro.content_short}
+                             />
                      </article>
          })}
       </div>
