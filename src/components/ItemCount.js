@@ -78,7 +78,7 @@ function ItemCount({name}) {
         <div>
              <ListGroup className="list-group-flush" style={{display: DispBuy}}>
                 <ListGroupItem>
-                    <Button variant="outline-secondary" onClick={handleChange}><img src={buy}/></Button>
+                    <Button variant="outline-secondary" onClick={handleChange}><img src={buy} alt="buy" /></Button>
                 </ListGroupItem>
             </ListGroup>
  

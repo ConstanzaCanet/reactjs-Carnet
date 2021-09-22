@@ -8,7 +8,7 @@ import logo from './img/book.jpg'
 
 
 export const NavBar = () => {
-    const [logueado, setlogueado]= React.useState(false);
+   
 
     return (
         <div>
@@ -38,8 +38,7 @@ export const NavBar = () => {
                           aria-label="Search"
                           />
                          <Button variant="outline-danger">Search</Button>
-                         <Button variant="dark"><img src={carro}/></Button>{' '}
-                         {logueado.toString()}
+                         <Button variant="dark"><img src={carro} alt="carrito"/></Button>{' '}
                         </Form>
                       
                      </Nav>

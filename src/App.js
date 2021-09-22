@@ -1,23 +1,29 @@
 import * as React from 'react';
 import './App.css';
 import NavBar from './components/NavBar';
-import Header from './components/Header';
-import {Spinner} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import CardContainers from './components/CardContainers';
-
+import { BrowserRouter,Route,Switch } from "react-router-dom";
+import Home from './pages/Home';
+import  Container  from './pages/Container';
+import NotFound from './pages/NotFound';
 
 function App() {
 
   return (
-    <div style={{textAlign:'center'}}>
+    <BrowserRouter>
+      <div style={{textAlign:'center'}}>
+        <NavBar />
+        
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route exact path="/container" component={Container} />
+          <Route path="*" component={NotFound} />
+        </Switch>
 
-    <NavBar />
-    <Header />
-    <CardContainers />
+      </div>
+    </BrowserRouter>
 
-    </div>
   );
 }
 
