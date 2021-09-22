@@ -83,3 +83,21 @@ body{
 .link:hover{
     color:crimson;
 }
+
+
+
+.detailCard{
+    display: flex;
+    width: 90%;
+    margin: 5%;
+}
+.contentCard{
+    font-size: 1rem;
+}
+.footerCard{
+    text-align: center;
+}
+
+.footerCard ul{
+    list-style: none;
+}
