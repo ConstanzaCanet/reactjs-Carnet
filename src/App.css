@@ -75,3 +75,11 @@ body{
 .NotFound{
     margin-top: 20%;
 }
+/*Altero estilo de los links*/
+.link{
+    text-decoration: none;
+    color: azure;
+}
+.link:hover{
+    color:crimson;
+}

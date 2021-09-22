@@ -5,11 +5,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {Spinner} from 'react-bootstrap';
 
 
-const CardContainers = () =>{
+const CardContainerDos = () =>{
     const [libros , setLibros] = React.useState([]);
     const[load,setLoad]=React.useState(false);
 
-    const urlAll= 'https://www.etnassoft.com/api/v1/get/?category=libros_programacion&criteria=most_viewed'; 
+    const urlAll= 'https://www.etnassoft.com/api/v1/get/?category=comics'; 
     React.useEffect(()=>{
         setLoad(true);
 
@@ -47,4 +47,4 @@ const CardContainers = () =>{
 
 };
 
-export default CardContainers;
+export default CardContainerDos;
