@@ -7,27 +7,15 @@ import { Link } from "react-router-dom";
 
 
 
-const Cards=({name,src,author,id,content}) =>{
+const Cards=({name,src,id}) =>{
     return(
-        <div className='card'>
-            <Card style={{ width: '18rem', height:'50rem' }}>
+            <Card style={{ width: '18rem', height:'30rem', marginTop: '8%' }}>
 
                 <Link to={`/product/${id}`}>
-                  <Card.Img variant="top" alt={id} src={src} />
+                  <Card.Img variant="top" alt={id} src={src} title={name}/>
                 </Link>
-
-                <Card.Body>
-                  <Card.Title className='CardTitu'>{name}</Card.Title>
-                  <Card.Text>
-                    {content}
-                    Autor: {author}
-                  </Card.Text>
-                </Card.Body>
-
-                <ItemCount name={name} />
-
+                <h2 className='CardTitu mt-3 mb-0'>{name}</h2>
             </Card>
-        </div>
     )
 }
 

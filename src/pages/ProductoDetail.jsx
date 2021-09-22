@@ -21,13 +21,13 @@ const ProductoDetail =()=>{
     <div>
             <Card.Header><h1>{producto?.title}</h1></Card.Header>
         <div className='detailCard'>
-            <div className='mt-4'>
+            <div>
                 <Card>
                     <Card.Img style={{ width: '30rem', height:'40rem' }} src={producto?.cover} />
                 </Card>
             </div>
             <div>
-                <Card style={{height:'40rem' }}>
+                <Card >
                     <Card.Body>
                         <Card.Text className='m-5'>
                             <blockquote className="contentCard">

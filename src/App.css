@@ -42,11 +42,7 @@ body{
 }
 
 /*Cards*/
-.card{
-    margin-top: 3%;
-    align-items: center;
-    margin-bottom: 3%; 
-}
+
 .divCard{
     margin: auto;
     display: flex;
@@ -88,6 +84,7 @@ body{
 
 .detailCard{
     display: flex;
+    flex-wrap: nowrap;
     width: 90%;
     margin: 5%;
 }
