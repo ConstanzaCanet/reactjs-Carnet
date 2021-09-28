@@ -8,8 +8,8 @@ import Home from './pages/Home';
 import  Container  from './pages/Container';
 import NotFound from './pages/NotFound';
 import ProductoDetail from './pages/ProductoDetail';
-
 import CardContainerDos from './components/CardContainerDos';
+import Cart from './pages/Cart';
 
 function App() {
 
@@ -23,6 +23,7 @@ function App() {
           <Route exact path="/container" component={Container} />
           <Route exact path="/container2" component={CardContainerDos}/>
           <Route exact path="/product/:id" component={ProductoDetail} />
+          <Route exact path="/cart" component={Cart} />
           <Route path="*" component={NotFound} />
         </Switch>
 

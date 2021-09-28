@@ -40,7 +40,9 @@ export const NavBar = () => {
                                 aria-label="Search"
                                 />
                                 <Button variant="outline-danger">Search</Button>
-                                <Button variant="dark"><img src={carro} alt="carrito"/></Button>{' '}
+                                <Link to='/cart' className='link'>
+                                    <Button variant="dark"><img src={carro} alt="carrito"/></Button>{' '}
+                                </Link>
                             </Form>
                         </Nav.Link>
                     </Nav>

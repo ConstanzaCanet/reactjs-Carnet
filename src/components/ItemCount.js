@@ -2,6 +2,8 @@ import * as React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Button,ButtonGroup,ListGroup,ListGroupItem,Card} from 'react-bootstrap';
 import buy from './img/buy.png'
+import { Link } from 'react-router-dom';
+import ButtonCount from './ButtonCount';
 
 function ItemCount({name}) {
     const[count,setCount]= React.useState(0);
@@ -49,7 +51,7 @@ function ItemCount({name}) {
             }
      }
         //Funcion que llevara a cabo el guardado del objeto en el carrito
-         const onClickFinish=(name,amount)=>{
+         const onClickFinish=(name,amount,e)=>{
             if (amount=== 0) {
                 alert('No hay productos en la canasta! No es posible realizar la compra')
                 setDisp('none');
@@ -88,10 +90,8 @@ function ItemCount({name}) {
                     <Button value={count} variant="dark">{count}</Button>
                     <Button variant="outline-dark" onClick={onClickAdd}>+</Button>
                 </ButtonGroup>
-                <Card.Body className='buttCoutn'>
-                  <Button variant="danger" onClick={onClickCancel}>Cancelar</Button>
-                  <Button variant="success" onClick={()=>onClickFinish(name,count)}>Finalizar</Button>
-                </Card.Body>
+
+                <ButtonCount handleClick={(e)=>onClickFinish(name,count,e)} onClickCancel={onClickCancel} />
             </div>
         </div>
 
@@ -99,4 +99,4 @@ function ItemCount({name}) {
     );
   }
   
-export default ItemCount
+export default ItemCount;
