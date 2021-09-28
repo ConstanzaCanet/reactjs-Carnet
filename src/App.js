@@ -10,12 +10,18 @@ import NotFound from './pages/NotFound';
 import ProductoDetail from './pages/ProductoDetail';
 import CardContainerDos from './components/CardContainerDos';
 import Cart from './pages/Cart';
+import ContextCart  from './context/ContextCart';
 
 function App() {
-
+  const [cart, setCart] = React.useState([]);
   return (
+
     <BrowserRouter>
+      <ContextCart.Provider value={cart}> 
+      
+
       <div style={{textAlign:'center'}}>
+
         <NavBar />
         
         <Switch>
@@ -23,11 +29,18 @@ function App() {
           <Route exact path="/container" component={Container} />
           <Route exact path="/container2" component={CardContainerDos}/>
           <Route exact path="/product/:id" component={ProductoDetail} />
-          <Route exact path="/cart" component={Cart} />
+          
+          <Route exact path="/cart">
+            <Cart />
+          </Route>
+
           <Route path="*" component={NotFound} />
         </Switch>
 
       </div>
+
+
+      </ContextCart.Provider>
     </BrowserRouter>
 
   );

@@ -1,8 +1,10 @@
 import * as React from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Table} from 'react-bootstrap';
+import ContextCart from "../context/ContextCart";
 /*Aqui mostraria el carrito---- */
 const Cart=()=>{
+    const cart = React.useContext(ContextCart);
     return(
         <div>AQUI MOSTRARIA EL CARRITO
             <Table striped bordered hover variant="dark">
@@ -10,7 +12,7 @@ const Cart=()=>{
                 <tr>
                     <th>Producto</th>
                     <th>Precio</th>
-                    <th>Unidades</th>
+                    <th>Unidades:{cart}</th>
                 </tr>
             </thead>
             <tbody>
