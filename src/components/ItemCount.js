@@ -1,8 +1,7 @@
 import * as React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {Button,ButtonGroup,ListGroup,ListGroupItem,Card} from 'react-bootstrap';
+import {Button,ButtonGroup,ListGroup,ListGroupItem} from 'react-bootstrap';
 import buy from './img/buy.png'
-import { Link } from 'react-router-dom';
 import ButtonCount from './ButtonCount';
 
 function ItemCount({name}) {

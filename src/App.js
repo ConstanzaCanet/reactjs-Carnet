@@ -10,14 +10,16 @@ import NotFound from './pages/NotFound';
 import ProductoDetail from './pages/ProductoDetail';
 import CardContainerDos from './components/CardContainerDos';
 import Cart from './pages/Cart';
-import ContextCart  from './context/ContextCart';
+import  {CartProvider, useCart}  from './context/ContextCart';
+
 
 function App() {
-  const [cart, setCart] = React.useState([]);
+  
   return (
 
     <BrowserRouter>
-      <ContextCart.Provider value={cart}> 
+
+      <CartProvider> 
       
 
       <div style={{textAlign:'center'}}>
@@ -40,7 +42,8 @@ function App() {
       </div>
 
 
-      </ContextCart.Provider>
+      </CartProvider>
+      
     </BrowserRouter>
 
   );

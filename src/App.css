@@ -98,3 +98,8 @@ body{
 .footerCard ul{
     list-style: none;
 }
+
+.tableFoot{
+    background-color: rgba(19, 18, 18, 0.959);
+    border-color: black;
+}
