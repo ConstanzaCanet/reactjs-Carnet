@@ -4,11 +4,13 @@ import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Card} from 'react-bootstrap';
 import { useParams } from "react-router";
+import { useCart } from "../context/ContextCart";
 
 
 const ProductoDetail =()=>{
     const [producto, setProducto] =React.useState({});
     const {id} = useParams();
+    const context= useCart();
 
     React.useEffect(()=>{
         fetch(`https://www.etnassoft.com/api/v1/get/?id=${id}`)

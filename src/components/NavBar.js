@@ -6,11 +6,13 @@ import carro from './img/carro.png'
 import logo from './img/book.jpg'
 
 import { Link } from "react-router-dom";
+import { useCart } from '../context/ContextCart';
 
 
 
 export const NavBar = () => {
    
+    const {cart}=useCart();
 
     return (
         <div>

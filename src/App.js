@@ -10,7 +10,7 @@ import NotFound from './pages/NotFound';
 import ProductoDetail from './pages/ProductoDetail';
 import CardContainerDos from './components/CardContainerDos';
 import Cart from './pages/Cart';
-import  {CartProvider, useCart}  from './context/ContextCart';
+
 
 
 function App() {
@@ -18,8 +18,6 @@ function App() {
   return (
 
     <BrowserRouter>
-
-      <CartProvider> 
       
 
       <div style={{textAlign:'center'}}>
@@ -40,9 +38,6 @@ function App() {
         </Switch>
 
       </div>
-
-
-      </CartProvider>
       
     </BrowserRouter>
 

@@ -3,13 +3,16 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-
+import  {CartProvider, useCart}  from './context/ContextCart';
 
 
 
 ReactDOM.render(
   <>
-    <App />
+    <CartProvider>
+      <App />
+    </CartProvider>
+    
   </>,
   document.getElementById('root')
 );
