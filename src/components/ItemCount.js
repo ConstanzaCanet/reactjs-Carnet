@@ -4,7 +4,7 @@ import {Button,ButtonGroup,ListGroup,ListGroupItem} from 'react-bootstrap';
 import buy from './img/buy.png'
 import ButtonCount from './ButtonCount';
 
-function ItemCount({name}) {
+function ItemCount({name , id , stock}) {
     const[count,setCount]= React.useState(0);
     const [Disp,setDisp]= React.useState('none');
     const [DispBuy,setDispBuy]= React.useState('block');
@@ -21,7 +21,7 @@ function ItemCount({name}) {
 
     const onClickAdd= ()=>{
 
-        if (count === 10) {
+        if (count === {stock}) {
             alert('No hay suficiente stock!')
         }else{
             setCount((prevState)=> prevState + 1);
@@ -36,21 +36,29 @@ function ItemCount({name}) {
                 setCount((prevState)=> prevState - 1)
          }
       }
+
+
         //Funcion que anule compra
         const onClickCancel= ()=>{
             setDisp('none');
             setDispBuy('block');
             alert('Compra anulada, sigue buscando, tenemos muchos libros!')
         }
+
+
         //creo un objeto que me permita guardar cantidad y nombre del libro(simulo un objeto de una api)
         class Libro{
-            constructor(name,amount){
+            constructor(name,amount,price,id){
                 this.name=name;
                 this.amount=amount;
+                this.price= (price/4).toFixed(2);
+                this.id=id;
             }
      }
+
+
         //Funcion que llevara a cabo el guardado del objeto en el carrito
-         const onClickFinish=(name,amount,e)=>{
+         const onClickFinish=(name,amount,price,id,e)=>{
             if (amount=== 0) {
                 alert('No hay productos en la canasta! No es posible realizar la compra')
                 setDisp('none');
@@ -64,7 +72,7 @@ function ItemCount({name}) {
                     localStorage.setItem('compra', JSON.stringify(carritoList));
                 }
                 //agrego producto al carrito y muestro señal
-                let libroAdquirido= new Libro(name, amount)
+                let libroAdquirido= new Libro(name, amount, price,id)
                 carritoList.push(libroAdquirido);
                 localStorage.setItem('compra', JSON.stringify(carritoList));
                 alert(`adquiriste el producto ${name}`)
@@ -90,7 +98,7 @@ function ItemCount({name}) {
                     <Button variant="outline-dark" onClick={onClickAdd}>+</Button>
                 </ButtonGroup>
 
-                <ButtonCount handleClick={(e)=>onClickFinish(name,count,e)} onClickCancel={onClickCancel} />
+                <ButtonCount handleClick={(e)=>onClickFinish(name,count,id,id)} onClickCancel={onClickCancel} />
             </div>
         </div>
 

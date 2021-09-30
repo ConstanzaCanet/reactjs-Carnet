@@ -27,7 +27,10 @@ const Cart=()=>{
                     <tr>
                         <td>Total</td>
                         <td>{cart}</td>
-                        <td><Button variant="danger"> Finalizar compra</Button></td>
+                        <td>
+                            <Button variant="success" className='m-2'> Finalizar compra</Button>
+                            <Button variant="danger"> Cancelar compra</Button>
+                        </td>
                     </tr>
                 </tfoot>
         
