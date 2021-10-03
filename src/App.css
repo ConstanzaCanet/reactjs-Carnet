@@ -40,6 +40,10 @@ body{
     color:azure;
     font-size: 5em;
 }
+.content p{
+    color: black;
+    font-weight: bolder;
+}
 
 /*Cards*/
 

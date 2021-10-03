@@ -11,7 +11,13 @@ import { useCart } from '../context/ContextCart';
 
 
 export const NavBar = () => {
-   
+    const home = 'libros_programacion&criteria=most_viewed'
+    /*Categorias*/
+    const comics = 'comics';
+    const idiomas= 'idiomas';
+    const programacion = 'libros_programacion'; 
+    const desarrolloWeb = 'desarrollo_web';
+    const musica= 'musica-biblioteca';
     const {cart}=useCart();
 
     return (
@@ -19,15 +25,17 @@ export const NavBar = () => {
 
         <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
             <Container>
-                <Navbar.Brand href="#home"><Link to='/'><img title='read' alt='book' className='logo'  src={logo}/></Link></Navbar.Brand>
+                <Navbar.Brand href="#home"><Link to='/' id ={home}><img title='read' alt='book' className='logo'  src={logo}/></Link></Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="me-auto">
                         <Nav.Link to='/'><Link to='/' className='link'>Home</Link></Nav.Link>
                         <NavDropdown title="Categorías" id="nav-dropdown-dark-example"  menuVariant="dark">
-                        <NavDropdown.Item href="#action/3.1"> <Link to='/container' className='link'>Container</Link> </NavDropdown.Item>
-                        <NavDropdown.Item href="#action/3.2"><Link to='/container2' className='link'>Container2</Link></NavDropdown.Item>
-                        <NavDropdown.Item href="#action/3.3"><Link to='/container' className='link'>Container</Link></NavDropdown.Item>
+                        <NavDropdown.Item href="#action/3.1"> <Link to={`/container/${comics}`} id='comics' className='link'>Comics</Link> </NavDropdown.Item>
+                        <NavDropdown.Item href="#action/3.2"> <Link to={`/container/${idiomas}`} id='idiomas' className='link'>Idiomas</Link> </NavDropdown.Item>
+                        <NavDropdown.Item href="#action/3.3"> <Link to={`/container/${musica}`} id='musica-biblioteca' className='link'>Musica</Link> </NavDropdown.Item>
+                        <NavDropdown.Item href="#action/3.3"> <Link to={`/container/${programacion}`} id='libros_programacion' className='link'>Programacion</Link> </NavDropdown.Item>
+                        <NavDropdown.Item href="#action/3.3"> <Link to={`/container/${desarrolloWeb}`} id='desarrollo_web' className='link'>Desarrollo Web</Link> </NavDropdown.Item>
                         <NavDropdown.Divider />
                         <NavDropdown.Item href="#action/3.4">Sobre nosotros</NavDropdown.Item>
                         </NavDropdown>

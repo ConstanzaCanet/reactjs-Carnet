@@ -5,11 +5,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import { BrowserRouter,Route,Switch } from "react-router-dom";
 import Home from './pages/Home';
-import  Container  from './pages/Container';
 import NotFound from './pages/NotFound';
 import ProductoDetail from './pages/ProductoDetail';
-import CardContainerDos from './components/CardContainerDos';
 import Cart from './pages/Cart';
+import CardContainers from './components/CardContainers';
 
 
 
@@ -26,8 +25,7 @@ function App() {
         
         <Switch>
           <Route exact path="/" component={Home} />
-          <Route exact path="/container" component={Container} />
-          <Route exact path="/container2" component={CardContainerDos}/>
+          <Route exact path="/container/:id" component={CardContainers} />
           <Route exact path="/product/:id" component={ProductoDetail} />
           
           <Route exact path="/cart">

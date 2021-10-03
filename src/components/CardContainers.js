@@ -3,13 +3,16 @@ import Cards from './Cards'
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Spinner} from 'react-bootstrap';
+import { useParams } from "react-router";
 
 
 const CardContainers = () =>{
     const [libros , setLibros] = React.useState([]);
     const[load,setLoad]=React.useState(false);
 
-    const urlAll= 'https://www.etnassoft.com/api/v1/get/?category=libros_programacion&criteria=most_viewed'; 
+    const {id} = useParams();
+
+    const urlAll= `https://www.etnassoft.com/api/v1/get/?category=${id}`; 
     React.useEffect(()=>{
         setLoad(true);
 
