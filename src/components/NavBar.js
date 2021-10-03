@@ -20,26 +20,20 @@ export const NavBar = () => {
     const musica= 'musica-biblioteca';
 
 
-    const {cart}=useCart();
+    const {cart , cantidad}=useCart();
 
-    const cantidad= () =>{
-        let quantity=0;
-        cart.forEach((p)=>{
-            quantity += p.quantity;
-        });
-        return quantity;
-    }
+
 
     return (
         <div>
 
         <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
             <Container>
-                <Navbar.Brand href="#home"><Link to='/' id ={home}><img title='read' alt='book' className='logo'  src={logo}/></Link></Navbar.Brand>
+                <Link to='/' id ={home}><img title='read' alt='book' className='logo'  src={logo}/></Link>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="me-auto">
-                        <Nav.Link to='/'><Link to='/' className='link'>Home</Link></Nav.Link>
+                        <Link to='/' className='link m-2'>Home</Link>
                         <NavDropdown title="Categorías" id="nav-dropdown-dark-example"  menuVariant="dark">
                         <NavDropdown.Item href="#action/3.1"> <Link to={`/container/${comics}`} id='comics' className='link'>Comics</Link> </NavDropdown.Item>
                         <NavDropdown.Item href="#action/3.2"> <Link to={`/container/${idiomas}`} id='idiomas' className='link'>Idiomas</Link> </NavDropdown.Item>
@@ -60,10 +54,10 @@ export const NavBar = () => {
                                 aria-label="Search"
                                 />
                                 <Button variant="outline-danger">Search</Button>
-                                <Link to={'/cart'} className='link'>
+                                <Link to='/cart' className='link'>
                                     <Button variant="dark"><img src={carro} alt="carrito"/></Button>
                                 </Link>
-                                <p className="cart_menu_num" >{cantidad()}</p>
+                                <p>{cantidad()}</p>
                             </Form>
                         </Nav.Link>
                     </Nav>

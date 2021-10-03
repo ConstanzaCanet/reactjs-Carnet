@@ -5,8 +5,7 @@ import  { useCart } from "../context/ContextCart";
 
 const CartDetail = ()=>{
     /* Aqui establezco contexto con carrito */
-    const { cart, setCart, saludito } = useCart();
-
+    const{cart}= useCart;
     /*Aqui establezco mapeo de carrito y productos */
     return(
         <tbody>
@@ -18,7 +17,7 @@ const CartDetail = ()=>{
                 <ButtonGroup style={{ width: '17rem' }} >
                     <Button variant="outline-dark" >-</Button>
                     <Button value="X" variant="dark">{cart}</Button>
-                    <Button variant="outline-dark" onClick={saludito}>+</Button>
+                    <Button variant="outline-dark">+</Button>
                 </ButtonGroup>
             </td>    
             </tr>

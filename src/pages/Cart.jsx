@@ -3,20 +3,14 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {Button,Table} from 'react-bootstrap';
 import CartDetail from '../components/CartDetail';
 import '../App.css';
-import ContextCart, { useCart } from "../context/ContextCart";
+import { useCart } from "../context/ContextCart";
+
 
 /*Aqui mostraria el carrito---- */
 const Cart=()=>{
     const {cart , clear}=useCart();
 
-    const confirm=()=>{
-        var opcion= confirm('¿Cancelas tu compra?')
-        if(opcion == true){
-            clear();
-        }else{
-            return console.log('continua tu compra')
-        }
-    }
+
     return(
         <div>AQUI MOSTRARIA EL CARRITO
             <Table striped bordered hover variant="dark">
@@ -29,15 +23,15 @@ const Cart=()=>{
                 </thead>
          
 
-                <CartDetail />
+                
 
                 <tfoot className ='tableFoot'>
                     <tr>
                         <td>Total</td>
-                        <td>{cart}</td>
+                        <td>{cart.length}</td>
                         <td>
                             <Button variant="success" className='m-2'> Finalizar compra</Button>
-                            <Button variant="danger" onClick={confirm}> Cancelar compra</Button>
+                            <Button variant="danger" onClick={clear}> Cancelar compra</Button>
                         </td>
                     </tr>
                 </tfoot>
