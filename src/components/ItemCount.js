@@ -2,7 +2,6 @@ import * as React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Button,ButtonGroup,ListGroup,ListGroupItem, Card} from 'react-bootstrap';
 import buy from './img/buy.png'
-import ButtonCount from './ButtonCount';
 import { useCart } from '../context/ContextCart';
 
 function ItemCount({name , id , stock}) {
@@ -10,7 +9,7 @@ function ItemCount({name , id , stock}) {
     const [Disp,setDisp]= React.useState('none');
     const [DispBuy,setDispBuy]= React.useState('block');
     
-    const { addItem }=useCart();
+    const { addItem, cart }=useCart();
 
     const handleChange= () =>{
         if(Disp ==='block'){
@@ -51,6 +50,7 @@ function ItemCount({name , id , stock}) {
         //Llamo funcion de compra
         const addToCart =()=>{
             addItem(id,count);
+            console.log(cart);
         }
 
     //Retorno elementos,componentes y funciones
@@ -71,7 +71,7 @@ function ItemCount({name , id , stock}) {
 
                 <Card.Body className='buttCoutn'>
                     <Button variant="danger" onClick={onClickCancel}>Cancelar</Button>
-                    <Button variant="success" onClick={addToCart}>Finalizar</Button> 
+                    <Button variant="success" onClick={addToCart} title='doble-click'>Finalizar</Button> 
                 </Card.Body>
             </div>
         </div>

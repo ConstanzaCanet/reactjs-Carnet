@@ -18,7 +18,17 @@ export const NavBar = () => {
     const programacion = 'libros_programacion'; 
     const desarrolloWeb = 'desarrollo_web';
     const musica= 'musica-biblioteca';
+
+
     const {cart}=useCart();
+
+    const cantidad= () =>{
+        let quantity=0;
+        cart.forEach((p)=>{
+            quantity += p.quantity;
+        });
+        return quantity;
+    }
 
     return (
         <div>
@@ -50,9 +60,10 @@ export const NavBar = () => {
                                 aria-label="Search"
                                 />
                                 <Button variant="outline-danger">Search</Button>
-                                <Link to='/cart' className='link'>
-                                    <Button variant="dark"><img src={carro} alt="carrito"/></Button>{' '}
+                                <Link to={'/cart'} className='link'>
+                                    <Button variant="dark"><img src={carro} alt="carrito"/></Button>
                                 </Link>
+                                <p className="cart_menu_num" >{cantidad()}</p>
                             </Form>
                         </Nav.Link>
                     </Nav>

@@ -9,7 +9,6 @@ export const CartProvider= ({ children }) =>{
     const addItem = (item , quantity)=> {
         const newItem={ item, quantity};
         setCart((prevState)=>[...prevState, newItem]);
-        console.log(cart);
     };
     /*elimina producto en particular*/
     const removeItem=(id)=>{
@@ -21,12 +20,17 @@ export const CartProvider= ({ children }) =>{
     };
     const isInCart =(id)=>{
 
-    }
+    };
 
-    function saludito(){
-        console.log('holis!');
-    }
-    const cosas={ cart, setCart,addItem, isInCart, removeItem, clear, saludito }
+    const cantidad= () =>{
+        let quantity=0;
+        cart.forEach((p)=>{
+            quantity += p.quantity;
+        });
+        return quantity;
+    };
+
+    const cosas={ cart, setCart,addItem, isInCart, removeItem, clear, cantidad }
     return <ContextCart.Provider  value={cosas}> {children} </ContextCart.Provider>;
 };
 
