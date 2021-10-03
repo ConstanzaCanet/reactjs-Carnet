@@ -1,4 +1,5 @@
 import * as React from "react";
+import swal from "sweetalert";
 
 const ContextCart = React.createContext([]);
 ContextCart.displayName = "ContextCart";
@@ -16,7 +17,22 @@ export const CartProvider= ({ children }) =>{
     };
     /*cancela/limpia carrito*/
     const clear =()=>{
-        setCart([]);
+        /*Muestro ventana de confirmacion */
+        swal({
+            title:'¿Estas seguro que deseas cancelar tu compra?',
+            text: 'Eliminaras todos los productos seleccionados',
+            icon:'warning',
+            buttons: ["No","Si"]
+        }).then(request =>{
+            if (request) {
+                setCart([]);
+                swal({
+                    title:'Carrito vaciado',
+                    text: 'no hay productos en el carrito',
+                    icon:'success',
+                    button: 'Aceptar'})
+            }
+        })
     };
     const isInCart =(id)=>{
 
