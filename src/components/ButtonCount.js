@@ -3,7 +3,7 @@ import * as React from "react";
 import {Button,Card} from 'react-bootstrap';
 import { useCart } from "../context/ContextCart";
 
-const ButtonCount =({name, count, handleClick , onClickCancel})=>{
+const ButtonCount =({name, count, handleClick , onClickCancel , id})=>{
     const {addItem} = useCart();
 
     const addToCart=()=>{

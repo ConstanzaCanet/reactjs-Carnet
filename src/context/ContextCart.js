@@ -5,16 +5,17 @@ ContextCart.displayName = "ContextCart";
 
 export const CartProvider= ({ children }) =>{
     const [cart, setCart] = React.useState([]);
-
+    /*funcion de compra*/
     const addItem = (item , quantity)=> {
         const newItem={ item, quantity};
         setCart((prevState)=>[...prevState, newItem]);
+        console.log(cart);
     };
-
+    /*elimina producto en particular*/
     const removeItem=(id)=>{
 
     };
-
+    /*cancela/limpia carrito*/
     const clear =()=>{
         setCart([]);
     };

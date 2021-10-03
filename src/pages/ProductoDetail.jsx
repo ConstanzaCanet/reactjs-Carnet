@@ -10,6 +10,7 @@ import { useCart } from "../context/ContextCart";
 const ProductoDetail =()=>{
     const [producto, setProducto] =React.useState({});
     const {id} = useParams();
+    
     const context= useCart();
 
     React.useEffect(()=>{
