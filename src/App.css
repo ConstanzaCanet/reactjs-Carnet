@@ -108,3 +108,14 @@ body{
     border-color: black;
 }
 
+.numProducts{
+    position: absolute;
+    top: 17%;
+    display: flex;
+    justify-content: center;
+    right: 13%;
+    background-color: red;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+}

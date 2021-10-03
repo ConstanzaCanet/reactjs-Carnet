@@ -22,7 +22,7 @@ const Cart=()=>{
                     </tr>
                 </thead>
          
-
+                <CartDetail />
                 
 
                 <tfoot className ='tableFoot'>

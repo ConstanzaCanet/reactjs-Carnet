@@ -16,7 +16,7 @@ const CartDetail = ()=>{
             <td>
                 <ButtonGroup style={{ width: '17rem' }} >
                     <Button variant="outline-dark" >-</Button>
-                    <Button value="X" variant="dark">{cart}</Button>
+                    <Button value="X" variant="dark"></Button>
                     <Button variant="outline-dark">+</Button>
                 </ButtonGroup>
             </td>    

@@ -32,10 +32,8 @@ const ProductoDetail =()=>{
             <div>
                 <Card >
                     <Card.Body>
-                        <Card.Text className='m-5'>
-                            <blockquote className="contentCard">
+                        <Card.Text className='m-5 contentCard'>
                                 {producto?.content}
-                            </blockquote>    
                             </Card.Text>
                         <footer className="blockquote-footer footerCard">
                             <ul>

@@ -45,7 +45,7 @@ export const NavBar = () => {
                         </NavDropdown>
                     </Nav>
                     <Nav>
-                        <Nav.Link>
+                       
                             <Form className="d-flex">
                                 <FormControl
                                 type="search"
@@ -55,11 +55,11 @@ export const NavBar = () => {
                                 />
                                 <Button variant="outline-danger">Search</Button>
                                 <Link to='/cart' className='link'>
+                                    <p className='numProducts'>{cantidad()}</p>
                                     <Button variant="dark"><img src={carro} alt="carrito"/></Button>
                                 </Link>
-                                <p>{cantidad()}</p>
                             </Form>
-                        </Nav.Link>
+                       
                     </Nav>
                 </Navbar.Collapse>
             </Container>
