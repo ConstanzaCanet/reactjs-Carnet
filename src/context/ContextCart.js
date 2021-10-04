@@ -81,8 +81,17 @@ export const CartProvider= ({ children }) =>{
         });
         return quantity;
     };
+    /*Total $$ compra*/
 
-    const cosas={ cart, setCart,addItem, isInCart, removeItem, clear, cantidad }
+    const totalMoney= ()=>{
+        let total=0;
+        cart.forEach((p)=>{
+            total += p.quantity*(p.item/100)
+        })
+        return total;
+    }
+
+    const cosas={ cart, setCart,addItem, isInCart, removeItem, clear, cantidad,totalMoney }
     return <ContextCart.Provider  value={cosas}> {children} </ContextCart.Provider>;
 };
 

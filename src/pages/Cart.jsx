@@ -8,7 +8,7 @@ import { useCart } from "../context/ContextCart";
 
 /*Aqui mostraria el carrito---- */
 const Cart=()=>{
-    const {cart , clear ,cantidad}=useCart();
+    const {cart , clear ,cantidad, totalMoney}=useCart();
     /*rendering*/
     const [loading , setLoading] = React.useState(true);
 
@@ -49,7 +49,7 @@ const Cart=()=>{
                          <td>Total</td>
                          <td>{cantidad()}</td>
                          <td>
-                         <Button value="X" variant="dark" style={{width: '15rem'}}>$Total</Button>
+                         <Button value="X" variant="dark" style={{width: '15rem'}}>${totalMoney()}</Button>
                              <Button variant="success" className='m-2'> Finalizar</Button>
                              <Button variant="danger" onClick={clear}> Cancelar</Button>
                          </td>
