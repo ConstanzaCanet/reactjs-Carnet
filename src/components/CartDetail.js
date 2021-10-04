@@ -13,14 +13,10 @@ const CartDetail = ()=>{
                 return (
                     <tr key={item.item}>
                     <td>{item.name}</td>
-                    <td>$$$</td>
+                    <td>{item.quantity}</td>
                     <td>
-                        <ButtonGroup style={{ width: '17rem' }} >
-                            <Button variant="outline-dark" >-</Button>
-                            <Button value="X" variant="dark">{item.quantity}</Button>
-                            <Button variant="outline-dark">+</Button>
-                        </ButtonGroup>
-                        <Button onClick={()=>removeItem(item.item)}>Eliminar</Button>
+                        <Button value="X" variant="dark" style={{width: '10rem'}}>${item.item/100}</Button>
+                        <Button onClick={()=>removeItem(item.item , item.name)}>Eliminar</Button>
                     </td>    
                     </tr>)
             })}

@@ -17,16 +17,44 @@ export const CartProvider= ({ children }) =>{
             timer: 2000,
         })
     };
+     /*funcion que evita adquirir producto con misma id*/
+    /*debo recorrer array cart y filtrar los que ya estan, evitando que se agreguen*/
+    const isInCart =(item , name, quantity)=>{
+        if(cart.find((product)=> product.item === item)){
+            return (
+                swal({
+               title:'Producto ya agregado!',
+               text: 'Este producto ya se encuentra en el carrito',
+               icon:'warning',
+               timer: 2000,
+           }))   
+        }else{
+            return addItem(item , name, quantity);
+        }
+    };
 
     /*elimina producto en particular*/
-    const removeItem=(item)=>{
-        const newItems = cart.filter((product)=> product.item !== item)
-        setCart(newItems)
+    const removeItem=(item, name)=>{
+        swal({
+            title:'¿Estas seguro que deseas eliminar este producto?',
+            text: `Eliminaras el producto ${name}`,
+            icon:'warning',
+            buttons: ["No","Si"]
+        }).then(request =>{
+            if (request) {
+                const newItems = cart.filter((product)=> product.item !== item)
+                setCart(newItems);
+                swal({
+                    title:'Producto eliminado',
+                    text: `${name} eliminado de carrito con exito`,
+                    icon:'success',
+                    button: 'Aceptar',
+                    timer: 2000})
+            }
+        })
     };
 
     /*cancela/limpia carrito*/
-
-
     const clear =()=>{
         /*Muestro ventana de confirmacion */
         swal({
@@ -44,11 +72,6 @@ export const CartProvider= ({ children }) =>{
                     button: 'Aceptar'})
             }
         })
-    };
-    /*funcion que evita adquirir producto con misma id*/
-    /*debo recorrer array cart y filtrar los que ya estan, evitando que se agreguen*/
-    const isInCart =(item)=>{
-
     };
 
     const cantidad= () =>{

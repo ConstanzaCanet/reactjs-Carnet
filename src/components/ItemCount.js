@@ -9,7 +9,7 @@ function ItemCount({name , id , stock}) {
     const [Disp,setDisp]= React.useState('none');
     const [DispBuy,setDispBuy]= React.useState('block');
     
-    const { addItem, cart }=useCart();
+    const { addItem, cart ,isInCart }=useCart();
 
     const handleChange= () =>{
         if(Disp ==='block'){
@@ -71,7 +71,7 @@ function ItemCount({name , id , stock}) {
 
                 <Card.Body className='buttCoutn'>
                     <Button variant="danger" onClick={onClickCancel}>Cancelar</Button>
-                    <Button variant="success" onClick={addToCart} title='doble-click'>Finalizar</Button> 
+                    <Button variant="success" onClick={()=> isInCart(id,name,count) } title='doble-click'>Finalizar</Button> 
                 </Card.Body>
             </div>
         </div>

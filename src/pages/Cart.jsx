@@ -1,6 +1,6 @@
 import * as React from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {Button,Table,Alert} from 'react-bootstrap';
+import {Button,Table,Alert,Spinner} from 'react-bootstrap';
 import CartDetail from '../components/CartDetail';
 import '../App.css';
 import { useCart } from "../context/ContextCart";
@@ -8,7 +8,7 @@ import { useCart } from "../context/ContextCart";
 
 /*Aqui mostraria el carrito---- */
 const Cart=()=>{
-    const {cart , clear}=useCart();
+    const {cart , clear ,cantidad}=useCart();
     /*rendering*/
     const [loading , setLoading] = React.useState(true);
 
@@ -29,16 +29,16 @@ const Cart=()=>{
 
     return(
         <>
-            {loading && <p>Cargando carrito...</p> }
+            {loading && <Spinner animation="grow" variant="info" style={{width: '6rem', height: '6rem', marginTop:'15%'}}/> }
 
             {!loading &&
-             <div>AQUI MOSTRARIA EL CARRITO
+             <div className='container' style={{marginTop:'10%'}}>AQUI MOSTRARIA EL CARRITO
              <Table striped bordered hover variant="dark">
                  <thead>
                      <tr>
                          <th>Producto</th>
-                         <th>Precio</th>
                          <th>Unidades</th>
+                         <th>Precio x unid.</th>
                      </tr>
                  </thead>
       
@@ -47,10 +47,11 @@ const Cart=()=>{
                  <tfoot className ='tableFoot'>
                      <tr>
                          <td>Total</td>
-                         <td>{cart.length}</td>
+                         <td>{cantidad()}</td>
                          <td>
-                             <Button variant="success" className='m-2'> Finalizar compra</Button>
-                             <Button variant="danger" onClick={clear}> Cancelar compra</Button>
+                         <Button value="X" variant="dark" style={{width: '15rem'}}>$Total</Button>
+                             <Button variant="success" className='m-2'> Finalizar</Button>
+                             <Button variant="danger" onClick={clear}> Cancelar</Button>
                          </td>
                      </tr>
                  </tfoot>
