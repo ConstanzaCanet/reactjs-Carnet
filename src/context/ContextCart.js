@@ -7,15 +7,26 @@ ContextCart.displayName = "ContextCart";
 export const CartProvider= ({ children }) =>{
     const [cart, setCart] = React.useState([]);
     /*funcion de compra*/
-    const addItem = (item , quantity)=> {
-        const newItem={ item, quantity};
+    const addItem = (item , name, quantity)=> {
+        const newItem={ item, name, quantity};
         setCart((prevState)=>[...prevState, newItem]);
+        swal({
+            title:'Genial!',
+            text: 'Has agregado un nuevo producto!',
+            icon:'success',
+            timer: 2000,
+        })
     };
-    /*elimina producto en particular*/
-    const removeItem=(id)=>{
 
+    /*elimina producto en particular*/
+    const removeItem=(item)=>{
+        const newItems = cart.filter((product)=> product.item !== item)
+        setCart(newItems)
     };
+
     /*cancela/limpia carrito*/
+
+
     const clear =()=>{
         /*Muestro ventana de confirmacion */
         swal({
@@ -34,7 +45,9 @@ export const CartProvider= ({ children }) =>{
             }
         })
     };
-    const isInCart =(id)=>{
+    /*funcion que evita adquirir producto con misma id*/
+    /*debo recorrer array cart y filtrar los que ya estan, evitando que se agreguen*/
+    const isInCart =(item)=>{
 
     };
 

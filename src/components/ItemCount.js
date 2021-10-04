@@ -49,7 +49,7 @@ function ItemCount({name , id , stock}) {
 
         //Llamo funcion de compra
         const addToCart =()=>{
-            addItem(id,count);
+            addItem(id,name,count);
             console.log(cart);
         }
 

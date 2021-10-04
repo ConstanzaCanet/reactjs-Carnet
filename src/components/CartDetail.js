@@ -5,23 +5,26 @@ import  { useCart } from "../context/ContextCart";
 
 const CartDetail = ()=>{
     /* Aqui establezco contexto con carrito */
-    const{cart}= useCart;
+    const{ cart, removeItem}= useCart();
     /*Aqui establezco mapeo de carrito y productos */
     return(
         <tbody>
+            {cart?.map(item => {
+                return (
+                    <tr key={item.item}>
+                    <td>{item.name}</td>
+                    <td>$$$</td>
+                    <td>
+                        <ButtonGroup style={{ width: '17rem' }} >
+                            <Button variant="outline-dark" >-</Button>
+                            <Button value="X" variant="dark">{item.quantity}</Button>
+                            <Button variant="outline-dark">+</Button>
+                        </ButtonGroup>
+                        <Button onClick={()=>removeItem(item.item)}>Eliminar</Button>
+                    </td>    
+                    </tr>)
+            })}
 
-            <tr>
-            <td>Producto 1</td>
-            <td>$$$</td>
-            <td>
-                <ButtonGroup style={{ width: '17rem' }} >
-                    <Button variant="outline-dark" >-</Button>
-                    <Button value="X" variant="dark"></Button>
-                    <Button variant="outline-dark">+</Button>
-                </ButtonGroup>
-            </td>    
-            </tr>
-            
         </tbody>
         
     );
