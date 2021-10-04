@@ -3,13 +3,14 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {Button,ButtonGroup,ListGroup,ListGroupItem, Card} from 'react-bootstrap';
 import buy from './img/buy.png'
 import { useCart } from '../context/ContextCart';
+import swal from "sweetalert";
 
 function ItemCount({name , id , stock}) {
     const[count,setCount]= React.useState(0);
     const [Disp,setDisp]= React.useState('none');
     const [DispBuy,setDispBuy]= React.useState('block');
     
-    const { addItem, cart ,isInCart }=useCart();
+    const { isInCart }=useCart();
 
     const handleChange= () =>{
         if(Disp ==='block'){
@@ -23,8 +24,14 @@ function ItemCount({name , id , stock}) {
 
     const onClickAdd= ()=>{
 
-        if (count === {stock}) {
-            alert('No hay suficiente stock!')
+        if (count >= {stock}) {
+            return (   
+                swal({
+                title:'No hay suficiente stock',
+                text: `${name} con limite de stock`,
+                icon:'warning',
+                button: 'Aceptar',
+                timer: 2000}))
         }else{
             setCount((prevState)=> prevState + 1);
         }
@@ -47,11 +54,6 @@ function ItemCount({name , id , stock}) {
             alert('Compra anulada, sigue buscando, tenemos muchos libros!')
         }
 
-        //Llamo funcion de compra
-        const addToCart =()=>{
-            addItem(id,name,count);
-            console.log(cart);
-        }
 
     //Retorno elementos,componentes y funciones
     return (
