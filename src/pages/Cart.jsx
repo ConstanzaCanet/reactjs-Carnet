@@ -50,6 +50,7 @@ const Cart=()=>{
                          <td>{cantidad()}</td>
                          <td>
                          <Button value="X" variant="dark" style={{width: '15rem'}}>${totalMoney()}</Button>
+                         <br />
                              <Button variant="success" className='m-2'> Finalizar</Button>
                              <Button variant="danger" onClick={clear}> Cancelar</Button>
                          </td>

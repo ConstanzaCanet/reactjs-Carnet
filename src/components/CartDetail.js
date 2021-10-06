@@ -11,7 +11,7 @@ const CartDetail = ()=>{
         <tbody>
             {cart?.map(item => {
                 return (
-                    <tr key={item.item}>
+                    <tr key={item.id}>
                     <td>{item.name}</td>
                     <td>{item.quantity}</td>
                     <td>

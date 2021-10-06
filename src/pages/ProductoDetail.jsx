@@ -82,7 +82,7 @@ const ProductoDetail =()=>{
                                         </ul>
                            
                                     </footer>
-                                    <ItemCount name={producto?.title} id={producto?.ID} stock={producto?.stock} listPrice={producto?.listPrice}/>
+                                    <ItemCount name={producto?.title} id={producto?.id} stock={producto?.stock} listPrice={producto?.listPrice}/>
 
                                 </Card.Body>
                             </Card>
