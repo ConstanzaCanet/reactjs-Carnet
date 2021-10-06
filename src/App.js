@@ -20,9 +20,9 @@ function App() {
       
 
       <div style={{textAlign:'center'}}>
-
+       
         <NavBar />
-        
+       
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/container/:id" component={CardContainers} />
