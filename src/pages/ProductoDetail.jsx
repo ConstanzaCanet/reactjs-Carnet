@@ -4,6 +4,7 @@ import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Card,Spinner} from 'react-bootstrap';
 import { useParams } from "react-router";
+import { getFirestore } from "../firebase";
 
 
 
@@ -23,11 +24,25 @@ const ProductoDetail =()=>{
 
 
     React.useEffect(()=>{
-        fetch(`https://www.etnassoft.com/api/v1/get/?id=${id}`)
-            .then((resp)=>resp.json())
-            .then((data)=>setProducto(data[0]))
-            .catch((error)=>console.log('Producto no encontrado'))
-    },[id])
+        const dataBase= getFirestore();
+        const productCollection = dataBase.collection('booksProducts');
+        
+        const book = productCollection.doc(id);
+        book.get()
+        .then((doc)=>{
+            if(!doc.exists){
+                console.log('PRODUCTO NO ENCONTRADO!')
+            }else{
+                setProducto({id: doc.id, ...doc.data()});
+            }
+        })
+        .catch(()=>{})
+        .finally(()=>{});
+    },[id]);
+
+
+
+
     return(
         <>
           {loading && <Spinner animation="grow" variant="info" style={{width: '6rem', height: '6rem', marginTop:'15%'}}/> }
@@ -38,30 +53,36 @@ const ProductoDetail =()=>{
                     <div className='detailCard'>
                         <div>
                             <Card>
-                                <Card.Img style={{ width: '30rem', height:'40rem' }} src={producto?.cover} />
+                                <Card.Img style={{ width: '30rem', height:'40rem' }} src={producto?.imageLinks} />
                             </Card>
                         </div>
                         <div>
                             <Card >
                                 <Card.Body>
                                     <Card.Text className='m-5 contentCard'>
-                                        {producto?.content}
+                                        {producto?.description}
                                     </Card.Text>
                                     <footer className="blockquote-footer footerCard">
                                         <ul>
                                             <li>
-                                                Author :  <cite title="Source Title">{producto?.author}</cite> 
+                                                Author :  <cite title="Source Title">{producto?.authors}</cite> 
                                             </li>
                                             <li>
-                                                Publisher date :  <cite title="Source Title">{producto?.publisher_date}</cite> 
+                                                Publisher date :  <cite title="Source Title">{producto?.publishedDate}</cite> 
                                             </li>
                                             <li>
-                                                Pages :  <cite title="Source Title">{producto?.pages}</cite> 
+                                                Categories :  <cite title="Source Title">{producto?.categorie}</cite> 
+                                            </li>
+                                            <li>
+                                                Pages :  <cite title="Source Title">{producto?.pageCount}</cite> 
+                                            </li>
+                                            <li>
+                                                Price :  <cite title="Source Title">${producto?.listPrice}</cite> 
                                             </li>
                                         </ul>
                            
                                     </footer>
-                                    <ItemCount name={producto?.title} id={producto?.ID} stock='10'/>
+                                    <ItemCount name={producto?.title} id={producto?.ID} stock={producto?.stock} listPrice={producto?.listPrice}/>
 
                                 </Card.Body>
                             </Card>

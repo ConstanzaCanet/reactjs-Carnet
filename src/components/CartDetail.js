@@ -1,6 +1,6 @@
 import * as React from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {Button,ButtonGroup} from 'react-bootstrap';
+import {Button} from 'react-bootstrap';
 import  { useCart } from "../context/ContextCart";
 
 const CartDetail = ()=>{
@@ -15,7 +15,7 @@ const CartDetail = ()=>{
                     <td>{item.name}</td>
                     <td>{item.quantity}</td>
                     <td>
-                        <Button value="X" variant="dark" style={{width: '10rem'}}>${item.item/100}</Button>
+                        <Button value="X" variant="dark" style={{width: '10rem'}}>${item.listPrice}</Button>
                         <Button onClick={()=>removeItem(item.item , item.name)}>Eliminar</Button>
                     </td>    
                     </tr>)

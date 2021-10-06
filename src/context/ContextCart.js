@@ -7,8 +7,8 @@ ContextCart.displayName = "ContextCart";
 export const CartProvider= ({ children }) =>{
     const [cart, setCart] = React.useState([]);
     /*funcion de compra*/
-    const addItem = (item , name, quantity)=> {
-        const newItem={ item, name, quantity};
+    const addItem = (item , name, quantity, listPrice)=> {
+        const newItem={ item, name, quantity, listPrice};
         setCart((prevState)=>[...prevState, newItem]);
         swal({
             title:'Genial!',
@@ -19,7 +19,7 @@ export const CartProvider= ({ children }) =>{
     };
      /*funcion que evita adquirir producto con misma id*/
     /*debo recorrer array cart y filtrar los que ya estan, evitando que se agreguen*/
-    const isInCart =(item , name, quantity)=>{
+    const isInCart =(item , name, quantity,listPrice)=>{
         if(cart.find((product)=> product.item === item)){
             return (
                 swal({
@@ -29,7 +29,7 @@ export const CartProvider= ({ children }) =>{
                timer: 2000,
            }))   
         }else{
-            return addItem(item , name, quantity);
+            return addItem(item , name, quantity,listPrice);
         }
     };
 
@@ -86,7 +86,7 @@ export const CartProvider= ({ children }) =>{
     const totalMoney= ()=>{
         let total=0;
         cart.forEach((p)=>{
-            total += p.quantity*(p.item/100)
+            total += p.quantity*(p.listPrice)
         })
         return total;
     }

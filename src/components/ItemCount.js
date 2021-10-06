@@ -5,7 +5,7 @@ import buy from './img/buy.png'
 import { useCart } from '../context/ContextCart';
 import swal from "sweetalert";
 
-function ItemCount({name , id , stock}) {
+function ItemCount({name , id , stock, listPrice}) {
     const[count,setCount]= React.useState(0);
     const [Disp,setDisp]= React.useState('none');
     const [DispBuy,setDispBuy]= React.useState('block');
@@ -73,7 +73,7 @@ function ItemCount({name , id , stock}) {
 
                 <Card.Body className='buttCoutn'>
                     <Button variant="danger" onClick={onClickCancel}>Cancelar</Button>
-                    <Button variant="success" onClick={()=> isInCart(id,name,count) } title='doble-click'>Finalizar</Button> 
+                    <Button variant="success" onClick={()=> isInCart(id,name,count,listPrice) } title='doble-click'>Finalizar</Button> 
                 </Card.Body>
             </div>
         </div>
