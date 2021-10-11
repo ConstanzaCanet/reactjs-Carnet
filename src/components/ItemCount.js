@@ -24,7 +24,7 @@ function ItemCount({name , id , stock, listPrice}) {
 
     const onClickAdd= ()=>{
 
-        if (count >= {stock}) {
+        if (count >= stock) {
             return (   
                 swal({
                 title:'No hay suficiente stock',
