@@ -4,11 +4,16 @@ import {Button,Table,Alert,Spinner} from 'react-bootstrap';
 import CartDetail from '../components/CartDetail';
 import '../App.css';
 import { useCart } from "../context/ContextCart";
+import { getFirestore } from "../firebase";
+
+import swal from "sweetalert";
+import firebase from 'firebase/compat/app';
+import "firebase/compat/firestore";
 
 
 /*Aqui mostraria el carrito---- */
 const Cart=()=>{
-    const {cart , clear ,cantidad, totalMoney}=useCart();
+    const {cart , clear ,cantidad, totalMoney,setCart}=useCart();
     /*rendering*/
     const [loading , setLoading] = React.useState(true);
 
@@ -26,6 +31,45 @@ const Cart=()=>{
             </Alert>
         )
     }
+
+    /*Boton Finalizar,firestore*/
+    const newOrder ={
+        buyer: {name: 'Juancito', phone:3514698746, email:'SabraDios@gmail.com' },
+        items: cart,
+        total: totalMoney(),
+        date: firebase.firestore.FieldValue.serverTimestamp(),
+    }
+
+
+    const handleCheckout=()=>{
+        const dataBase = getFirestore();
+        const ordersCollection= dataBase.collection('orders');
+        swal({
+            title:'Ya casi es tuyo!',
+            text: `¿Finalizas aqui tu compra?`,
+            icon:'info',
+            buttons: ["No","Si"]
+        }).then(request =>{
+            if (request) {
+                ordersCollection
+                    .add(newOrder)
+                    .then((docRef) => console.log('Se cerro compra!', docRef.id))
+                    .catch((error) => console.log(error));
+
+                swal({
+                    title:'Compra exitosa!',
+                    icon:'success',
+                    button: 'Aceptar',
+                    timer: 2000})
+                    
+                    setCart([])
+            }else{
+                return console.log('sigue con su compra')
+            }
+        })
+       
+    }
+
 
     return(
         <>
@@ -51,7 +95,7 @@ const Cart=()=>{
                          <td>
                          <Button value="X" variant="dark" style={{width: '15rem'}}>${totalMoney()}</Button>
                          <br />
-                             <Button variant="success" className='m-2'> Finalizar</Button>
+                             <Button variant="success" className='m-2' onClick= {handleCheckout}> Finalizar</Button>
                              <Button variant="danger" onClick={clear}> Cancelar</Button>
                          </td>
                      </tr>
