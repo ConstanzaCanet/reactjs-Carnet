@@ -7,11 +7,10 @@ import { useParams } from "react-router";
 import { getFirestore } from "../firebase";
 
 
-
 const ProductoDetail =()=>{
     const [producto, setProducto] =React.useState({});
 
-        /*Agregado de rendering */
+        /*rendering */
     const [loading , setLoading] = React.useState(true); 
     React.useEffect(() => {
         setTimeout(() => setLoading(false), 3000)
@@ -48,48 +47,40 @@ const ProductoDetail =()=>{
           {loading && <Spinner animation="grow" variant="info" style={{width: '6rem', height: '6rem', marginTop:'15%'}}/> }
 
           {!loading &&
-            <div>
-                <Card.Header><h1>{producto?.title}</h1></Card.Header>
-                    <div className='detailCard'>
-                        <div>
-                            <Card>
-                                <Card.Img style={{ width: '30rem', height:'40rem' }} src={producto?.imageLinks} />
-                            </Card>
-                        </div>
-                        <div>
-                            <Card >
-                                <Card.Body>
-                                    <Card.Text className='m-5 contentCard'>
-                                        {producto?.description}
-                                    </Card.Text>
-                                    <footer className="blockquote-footer footerCard">
-                                        <ul>
-                                            <li>
-                                                Author :  <cite title="Source Title">{producto?.authors}</cite> 
-                                            </li>
-                                            <li>
-                                                Publisher date :  <cite title="Source Title">{producto?.publishedDate}</cite> 
-                                            </li>
-                                            <li>
-                                                Categories :  <cite title="Source Title">{producto?.categorie}</cite> 
-                                            </li>
-                                            <li>
-                                                Pages :  <cite title="Source Title">{producto?.pageCount}</cite> 
-                                            </li>
-                                            <li>
-                                                Price :  <cite title="Source Title">${producto?.listPrice}</cite> 
-                                            </li>
-                                        </ul>
-                           
-                                    </footer>
-                                    <ItemCount name={producto?.title} id={producto?.id} stock={producto?.stock} listPrice={producto?.listPrice}/>
+            <div className="box01 container">
+                    <div className="row row-cols-sm-8 row-cols-md-8">
 
-                                </Card.Body>
-                            </Card>
-
-                        </div>
+                    <div className="col">
+                            <img style={{ width: '30rem', height:'40rem',objectFit:'cover', float:'left'}} src={producto?.imageLinks} />
                     </div>
-            
+
+                    <div className="box03 col">
+                            <h1 className='titleBook'>{producto?.title}</h1>
+                            <p>
+                                {producto?.description}
+                            </p>
+                                <footer className="blockquote-footer footerCard">
+                                    <ul>
+                                        <li>
+                                            Author :  <cite title="Source Title">{producto?.authors}</cite> 
+                                        </li>
+                                        <li>
+                                            Publisher date :  <cite title="Source Title">{producto?.publishedDate}</cite> 
+                                        </li>
+                                        <li>
+                                            Categories :  <cite title="Source Title">{producto?.categories}</cite> 
+                                        </li>
+                                        <li>
+                                            Pages :  <cite title="Source Title">{producto?.pageCount}</cite> 
+                                        </li>
+                                        <li>
+                                            Price :  <cite title="Source Title">${producto?.listPrice}</cite> 
+                                        </li>
+                                    </ul>
+                                </footer>
+                                <ItemCount name={producto?.title} id={producto?.id} stock={producto?.stock} listPrice={producto?.listPrice}/>
+                    </div>
+                </div>
              </div>
             }
     </>

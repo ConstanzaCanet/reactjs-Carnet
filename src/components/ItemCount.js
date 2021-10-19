@@ -1,11 +1,14 @@
 import * as React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {Button,ButtonGroup,ListGroup,ListGroupItem, Card} from 'react-bootstrap';
+import {Button,ButtonGroup,ListGroup, Card} from 'react-bootstrap';
 import buy from './img/buy.png'
 import { useCart } from '../context/ContextCart';
 import swal from "sweetalert";
+import { useUser } from "../context/ContextUser";
 
 function ItemCount({name , id , stock, listPrice}) {
+    const { datos } = useUser();
+
     const[count,setCount]= React.useState(0);
     const [Disp,setDisp]= React.useState('none');
     const [DispBuy,setDispBuy]= React.useState('block');
@@ -13,12 +16,16 @@ function ItemCount({name , id , stock, listPrice}) {
     const { isInCart }=useCart();
 
     const handleChange= () =>{
-        if(Disp ==='block'){
-            setDisp('none');
-            setDispBuy('block');
+        if ( !datos ) {            
+            if(Disp ==='block'){
+                setDisp('none');
+                setDispBuy('block');
+            }else{
+                setDisp('block');
+                setDispBuy('none');
+            }
         }else{
-            setDisp('block');
-            setDispBuy('none');
+            /*Aqui el codigo se me  rompe!*/
         }
     }
 
@@ -58,10 +65,8 @@ function ItemCount({name , id , stock, listPrice}) {
     //Retorno elementos,componentes y funciones
     return (
         <div>
-             <ListGroup className="list-group-flush" style={{display: DispBuy}}>
-                <ListGroupItem>
+             <ListGroup style={{display: DispBuy}}>
                     <Button variant="outline-secondary" onClick={handleChange}><img src={buy} alt="buy" /></Button>
-                </ListGroupItem>
             </ListGroup>
  
             <div className='itemCount' style={{display: Disp}}>

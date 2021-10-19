@@ -9,10 +9,11 @@ import NotFound from './pages/NotFound';
 import ProductoDetail from './pages/ProductoDetail';
 import Cart from './pages/Cart';
 import CardContainers from './components/CardContainers';
-
+import Login from './pages/Login';
 
 
 function App() {
+
   
   return (
 
@@ -25,6 +26,7 @@ function App() {
        
         <Switch>
           <Route exact path="/" component={Home} />
+          <Route exact path="/login" component={Login}/>
           <Route exact path="/container/:id" component={CardContainers} />
           <Route exact path="/product/:id" component={ProductoDetail} />
           <Route exact path="/cart" component={Cart}/>

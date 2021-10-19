@@ -4,30 +4,35 @@ import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Spinner} from 'react-bootstrap';
 import { useParams } from "react-router";
+import { getFirestore } from '../firebase/index';
+
 
 
 const CardContainers = () =>{
     const [libros , setLibros] = React.useState([]);
     const[load,setLoad]=React.useState(false);
+    const [error, setError]= React.useState(null);
 
     const {id} = useParams();
 
-    const urlAll= `https://www.etnassoft.com/api/v1/get/?category=${id}`; 
+   
+    /*LLAMADO A FIREBASE */
     React.useEffect(()=>{
-        setLoad(true);
+      const dataBase = getFirestore();
+      const productCollection = dataBase.collection('booksProducts').where('categories', '==', id);
 
-        fetch(urlAll)
-        .then((resp) =>{
-         if (resp.ok) {
-                return resp.json();
-            }else{
-                 throw resp;
-            }
-        })
-        .then((books)=> setLibros(books))
-        .catch((error) => console.log('libro inexistente'))
-        .finally(()=> setLoad(false))
-         },[]);
+      productCollection
+      .get()
+      .then((querySnapshot)=>{
+        if(querySnapshot.empty) {
+          console.log("DATA FALTANTE")
+        }else{
+          setLibros(querySnapshot.docs.map((doc)=>({id: doc.id, ...doc.data()})))
+        }
+      })
+      .catch((error)=>setError(error))
+      .finally(()=> setLoad(false))
+    },[[],libros]);
 
     return(
       <div className='divCard'>
@@ -35,13 +40,13 @@ const CardContainers = () =>{
          
          
          {libros?.map(libro=> {
-             return <article key={libro.ID}>
+             return <article key={libro.id}>
                         <Cards 
-                             id={libro.ID}
-                             src={libro.cover}
-                             name={libro.title}
-                             author={libro.author}
-                             content={libro.content_short}
+                               id={libro.id}
+                               src={libro.imageLinks}
+                               name={libro.title}
+                               author={libro.authors}
+                               content={libro.description}
                              />
                      </article>
          })}

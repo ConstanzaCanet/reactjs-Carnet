@@ -44,9 +44,24 @@ body{
     color: black;
     font-weight: bolder;
 }
-
-/*Cards*/
-
+/*NavBar*/
+.dropdown{
+    display: block;
+}
+.categoriesItems{
+    margin: 0px;
+    padding: 0px;
+}
+.categoriesItems li{
+    text-decoration: none;
+    list-style: none;
+    margin: 0px;
+    padding: 5px 8px 8px 15px;
+}
+.categoriesItems li:hover{
+    background-color: rgb(119, 119, 119);
+}
+/*Contenedor de Cards---> en  CardContainer.js*/
 .divCard{
     margin: auto;
     display: flex;
@@ -54,21 +69,43 @@ body{
     justify-content: space-between;
     margin: 5%;
 }
+/*Cada tarjetita en Cards.js*/
 .CardTitu{
-    background-color: rgb(129, 163, 255);
-    color: rgb(0, 0, 0);
-    width: 18rem;
-    font-size:medium;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: rgba(18, 5, 93, 0.541);
+    color: rgba(255, 254, 254, 0);
+    position:absolute;
+    width: 0%;
+    height:100%;
+    font-size:larger;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    transition: all 250ms ease-in-out
 }
 
-/*ITEM COUNT EN CARDS*/
-.itemCount{
-    color: white;
-    margin-top:3px ;
+
+.CatalogoCard{
+    margin: 1.3rem 1.3em 0rem auto;
+    border-radius: 6px;
+    overflow:hidden;
+    margin-top: '8%';
+    box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.2);
+    cursor: default;
+    transition: all 400ms ease;  
 }
-.buttCoutn{
-    display: flex;
-    justify-content: space-between; 
+/*Efecto hover sobre cards!*/
+.CatalogoCard:hover{
+    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.4);
+    transform: translateY(-3%);
+}
+.CatalogoCard:hover h2{
+    width: 100%;
+    color:rgb(250, 250, 250);
+}
+.CardImg{
+    width: 20rem;
+    height:20rem;
 }
 
 
@@ -85,13 +122,6 @@ body{
 }
 
 
-
-.detailCard{
-    display: flex;
-    flex-wrap: nowrap;
-    width: 90%;
-    margin: 5%;
-}
 .contentCard{
     font-size: 1rem;
 }
@@ -118,4 +148,70 @@ body{
     width: 25px;
     height: 25px;
     border-radius: 50%;
+}
+/*DETALLES DEL PRODUCTO*/
+
+.box01{
+    border-radius: 2%;
+    margin: 5%;
+    overflow: hidden;
+    background: white;
+    color: black;
+    box-shadow: 0 15px 30px 1px rgba(128, 128, 128, 0.31);
+  }
+
+/*Oculto y muestro texto de descripcion*/
+.box03 p{
+    font-size: 0.9rem;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 5 ;
+    line-clamp: 5;
+    overflow:hidden;
+}
+.box03 p:active{
+    display:block
+}
+
+  .titleBook{
+    font-family: 'Old Standard TT', serif;
+    position: relative;
+	font-size: 2.5rem;
+	color: #344055;
+	margin:5%
+  }
+  
+ /*ITEM COUNT EN CARDS*/
+.itemCount{
+    color: white;
+    width: 45%;
+    margin-left: 29%;
+    transform: translateX(-10%); padding-right: 15px;
+}
+.buttCoutn{
+    display: flex;
+    justify-content:space-around;
+    margin-top: 15%;
+    margin-left: 10%;
+}
+/*Formulariossss!*/
+.formLogueo{
+    display: flex;
+    justify-content:center;
+}
+.formLogueoRow{
+    width: 80%;
+    position: absolute;
+    top: 30%;
+    box-shadow: 0 15px 30px 1px rgba(128, 128, 128, 0.31);
+    font-family: 'Old Standard TT', serif;
+}
+.titleLogin{
+    font-family: 'Old Standard TT', serif;
+    margin:7%
+}
+.imgLogin{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
 }
