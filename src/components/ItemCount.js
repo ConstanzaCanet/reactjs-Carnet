@@ -2,21 +2,22 @@ import * as React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Button,ButtonGroup,ListGroup, Card} from 'react-bootstrap';
 import buy from './img/buy.png'
-import { useCart } from '../context/ContextCart';
 import swal from "sweetalert";
 import { useUser } from "../context/ContextUser";
+import { useCart } from '../context/ContextCart';
 
 function ItemCount({name , id , stock, listPrice}) {
     const { datos } = useUser();
+    const { isInCart }=useCart();
 
     const[count,setCount]= React.useState(0);
     const [Disp,setDisp]= React.useState('none');
     const [DispBuy,setDispBuy]= React.useState('block');
     
-    const { isInCart }=useCart();
+
 
     const handleChange= () =>{
-        if ( !datos ) {            
+        if (datos == 0 ) {            
             if(Disp ==='block'){
                 setDisp('none');
                 setDispBuy('block');
@@ -25,7 +26,7 @@ function ItemCount({name , id , stock, listPrice}) {
                 setDispBuy('none');
             }
         }else{
-            /*Aqui el codigo se me  rompe!*/
+            return console.log('logueate')
         }
     }
 
@@ -58,7 +59,12 @@ function ItemCount({name , id , stock, listPrice}) {
         const onClickCancel= ()=>{
             setDisp('none');
             setDispBuy('block');
-            alert('Compra anulada, sigue buscando, tenemos muchos libros!')
+            return( 
+                swal({
+                title:'Se ha cancelado solicitud',
+                icon:'warning',
+                button: 'Aceptar',
+                timer: 2000}))
         }
 
 

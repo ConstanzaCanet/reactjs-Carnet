@@ -9,7 +9,16 @@ export const UserProvider = ({ children }) =>{
         email:"",
         password:""
      });
-     const cosas={datos,setDatos}
+
+     
+    const handleInputChange =(event)=>{
+        setDatos({
+            ...datos,
+            [event.target.name] : event.target.value
+        })
+    }
+
+     const cosas={datos,setDatos,handleInputChange}
      return <ContextUser.Provider value={cosas}> {children} </ContextUser.Provider>
 }
 
