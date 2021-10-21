@@ -182,7 +182,11 @@ body{
   }
   
  /*ITEM COUNT EN CARDS*/
+ .botonBuy{
+     display:block;
+ }
 .itemCount{
+    display: none;
     color: white;
     width: 45%;
     margin-left: 29%;

@@ -1,7 +1,7 @@
 import * as React from 'react';
+import { createRef, useRef } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {Button,ButtonGroup,ListGroup, Card} from 'react-bootstrap';
-import buy from './img/buy.png'
+import {Button,ButtonGroup,Card} from 'react-bootstrap';
 import swal from "sweetalert";
 import { useUser } from "../context/ContextUser";
 import { useCart } from '../context/ContextCart';
@@ -11,24 +11,20 @@ function ItemCount({name , id , stock, listPrice}) {
     const { isInCart }=useCart();
 
     const[count,setCount]= React.useState(0);
-    const [Disp,setDisp]= React.useState('none');
-    const [DispBuy,setDispBuy]= React.useState('block');
     
+    let refBuy = useRef(),
+    refBuyBtn = useRef();
 
-
-    const handleChange= () =>{
-        if (datos == 0 ) {            
-            if(Disp ==='block'){
-                setDisp('none');
-                setDispBuy('block');
-            }else{
-                setDisp('block');
-                setDispBuy('none');
-            }
+    const handleBuyRef = (e)=>{
+        if(refBuyBtn.current.textContent === 'Adquirir'){
+            refBuyBtn.current.textContent ='Cerrar';
+            refBuy.current.style.display='block';
         }else{
-            return console.log('logueate')
+            refBuyBtn.current.textContent= 'Adquirir';
+            refBuy.current.style.display='none';
+            setCount(0)
         }
-    }
+    };
 
     const onClickAdd= ()=>{
 
@@ -47,35 +43,19 @@ function ItemCount({name , id , stock, listPrice}) {
         //Funcion que disminuya cantidad de elementos seleccionados
         const onClickLess=()=>{
             if (count=== 0) {
-             setDisp('none');
-                setDispBuy('block');
+                refBuy.current.style.display='none';
+                refBuyBtn.current.textContent= 'Adquirir';
             }else{
                 setCount((prevState)=> prevState - 1)
          }
-      }
-
-
-        //Funcion que anule compra
-        const onClickCancel= ()=>{
-            setDisp('none');
-            setDispBuy('block');
-            return( 
-                swal({
-                title:'Se ha cancelado solicitud',
-                icon:'warning',
-                button: 'Aceptar',
-                timer: 2000}))
-        }
-
+      };
 
     //Retorno elementos,componentes y funciones
     return (
         <div>
-             <ListGroup style={{display: DispBuy}}>
-                    <Button variant="outline-secondary" onClick={handleChange}><img src={buy} alt="buy" /></Button>
-            </ListGroup>
- 
-            <div className='itemCount' style={{display: Disp}}>
+            <Button variant="outline-secondary" onClick={handleBuyRef} ref={refBuyBtn}>Adquirir</Button>
+
+            <div className='itemCount' ref={refBuy}>
                 <ButtonGroup style={{ width: '17rem' }} defaultValue={count}>
                     <Button variant="outline-dark" onClick={onClickLess}>-</Button>
                     <Button value={count} variant="dark">{count}</Button>
@@ -83,7 +63,6 @@ function ItemCount({name , id , stock, listPrice}) {
                 </ButtonGroup>
 
                 <Card.Body className='buttCoutn'>
-                    <Button variant="danger" onClick={onClickCancel}>Cancelar</Button>
                     <Button variant="success" onClick={()=> isInCart(id,name,count,listPrice) } title='doble-click'>Finalizar</Button> 
                 </Card.Body>
             </div>
