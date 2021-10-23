@@ -182,8 +182,13 @@ body{
   }
   
  /*ITEM COUNT EN CARDS*/
+ .buyDiv{
+    display:flex;
+    margin: 8%;
+    justify-content:center;
+ }
  .botonBuy{
-     display:block;
+    display:block;
  }
 .itemCount{
     display: none;
@@ -193,10 +198,8 @@ body{
     transform: translateX(-10%); padding-right: 15px;
 }
 .buttCoutn{
-    display: flex;
-    justify-content:space-around;
     margin-top: 15%;
-    margin-left: 10%;
+    margin-left: 18%;
 }
 /*Formulariossss!*/
 .formLogueo{

@@ -8,14 +8,24 @@ export const CartProvider= ({ children }) =>{
     const [cart, setCart] = React.useState([]);
     /*funcion de compra*/
     const addItem = (item , name, quantity, listPrice)=> {
-        const newItem={ item, name, quantity, listPrice};
-        setCart((prevState)=>[...prevState, newItem]);
-        swal({
-            title:'Genial!',
-            text: 'Has agregado un nuevo producto!',
-            icon:'success',
-            timer: 2000,
-        })
+        if (quantity === 0) {
+            return (
+                swal({
+               title:'Upss!',
+               text: 'Valor incorrecto',
+               icon:'warning',
+               timer: 2000,
+            }))
+        } else{
+               const newItem={ item, name, quantity, listPrice};
+               setCart((prevState)=>[...prevState, newItem]);
+               swal({
+                   title:'Genial!',
+                   text: 'Has agregado un nuevo producto!',
+                   icon:'success',
+                   timer: 2000,
+                })
+           }
     };
      /*funcion que evita adquirir producto con misma id*/
     /*debo recorrer array cart y filtrar los que ya estan, evitando que se agreguen*/

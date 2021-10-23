@@ -52,11 +52,13 @@ function ItemCount({name , id , stock, listPrice}) {
 
     //Retorno elementos,componentes y funciones
     return (
-        <div>
+        <div className='container'>
+            <div className='buyDiv'>
             <Button variant="outline-secondary" onClick={handleBuyRef} ref={refBuyBtn}>Adquirir</Button>
+            </div>
 
             <div className='itemCount' ref={refBuy}>
-                <ButtonGroup style={{ width: '17rem' }} defaultValue={count}>
+                <ButtonGroup style={{ width: '17rem', marginLeft:'1rem' }} defaultValue={count}>
                     <Button variant="outline-dark" onClick={onClickLess}>-</Button>
                     <Button value={count} variant="dark">{count}</Button>
                     <Button variant="outline-dark" onClick={onClickAdd}>+</Button>

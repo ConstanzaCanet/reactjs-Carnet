@@ -1,22 +1,45 @@
-import  React, { useState } from "react";
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Button,Form} from 'react-bootstrap';
 import  imgBook  from '../components/img/images.png'
-import { useUser } from "../context/ContextUser";
-
-
+import { useForm } from '../components/hook/useForm';
 import Input from '../components/Input';
 
+    /*Valor inicial de formulario, dejo definido para evitar errores */
+    const initialForm={
+        name:"",
+        email:"",
+        password:"",
+    };
+
+    /*Funcion actualizada en handleBlur--->se actualizan errores, lo manejo con un array, donde al llenarse se asocia con un error especifico */
+    const validationsForm=(form)=>{
+        let newErrors={};
+
+        if(!form.name.trim()){
+            newErrors.name = "Username es requerido";
+        }
+        return newErrors
+    };
+
+
+
 const Login=()=>{
-    const [usuario, SetUsuario]=useState({campo:'', display:'none' ,valido:null });
-    const [email, SetEmail]=useState({campo:'', display:'none',valido:null});
-    const [password, SetPassword]=useState({campo:'', display:'none',valido:null});
-    const [ terminos,SetTerminos ] = useState(false);
-    const [formvalido, SetFormvalidado] = useState(null);
+    const {
+        form,
+        errors,
+        loading,
+        respon,
+        handleSubmit,
+        handleChange,
+        handleBlur,
+    } = useForm(initialForm,validationsForm);
 
 
-    const { datos, handleInputChange } = useUser();
+
+
+
+  /*  const { datos, handleInputChange } = useUser();
 
     const enviarData =(e)=>{
         e.preventDefault();
@@ -39,8 +62,8 @@ const Login=()=>{
     const onChangeTerm = (e) =>{
         SetTerminos(e.target.checked)
     }
-    
-    return(
+*/
+        return(
         <div className='container formLogueo'>
             <div className='row formLogueoRow'>
                     <div className='col-sm'>
@@ -48,48 +71,46 @@ const Login=()=>{
                     </div>
 
                     <div className='col-sm'>
-                    <Form className='m-3' onSubmit ={enviarData}>
+                    <Form className='m-3' onSubmit ={handleSubmit}>
                         <h1 className='titleLogin'>Bienvenido!</h1>
-                        
+
+                        {JSON.stringify(errors.name)}
+
                         <Input
-                            estado= {usuario}
-                            cambiarEstado= {SetUsuario} 
-                            label='User Name' 
-                            name='usuario' 
-                            placeholder='Enter username' 
-                            tipo='text' 
-                            error='El usuario debe tener de 5 a 15 digitos, solo con numeros, letras y guion bajo.'
-                            ExpReg={expresiones.usuario}
-                            
-                        />
-                        <Input 
-                            estado={email}
-                            cambiarEstado={SetEmail}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
                             label='Email address' 
+                            value={form.name}
+                            name='name' 
+                            placeholder='Enter User name' 
+                            tipo='text'
+                        />
+                        {errors.name&&<p style={{color:'red'}}>{errors.name}</p>}
+                        <Input 
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            label='Email address' 
+                            value={form.email}
                             name='email' 
                             placeholder='Enter email' 
                             tipo='email'
-                            error='El email no posee carecteres que correspondan'
-                            ExpReg={expresiones.correo}
                         />
+                        {errors.email&&<p style={{color:'red'}}>{errors.email}</p>}
                         <Input
-                            estado={password}
-                            cambiarEstado={SetPassword}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
                             label='Password' 
+                            value={form.password}
                             name='password' 
                             placeholder='Password' 
                             tipo='password'
-                            error='La contraseña debe contener de 7 a 15 caracteres, incluyendo numeros y caracteres.'
-                            ExpReg={expresiones.password}
                         />
-
+                    {errors.password&&<p style={{color:'red'}}>{errors.password}</p>}
                         <Form.Group className="mb-5" controlId="formBasicCheckbox">
                             <Form.Check 
                                 type="checkbox" 
                                 label="Acepto terminos y condiciones" 
                                 className='checkBox' 
-                                checked={terminos}
-                                onChange={onChangeTerm} 
                                 />
                         </Form.Group>
                         
