@@ -15,10 +15,28 @@ import Input from '../components/Input';
     /*Funcion actualizada en handleBlur--->se actualizan errores, lo manejo con un array, donde al llenarse se asocia con un error especifico */
     const validationsForm=(form)=>{
         let newErrors={};
+        let regexName =/^[a-zA-Z0-9\_\-]{4,16}$/;
+        let regexEmail= /^(\w+[/./-]?){1,}@[a-z]+[/.]\w{2,}$/;
+        let regexPass=/^.{5,15}$/;
 
         if(!form.name.trim()){
-            newErrors.name = "Username es requerido";
+            newErrors.name = "El campo username es requerido";
+        }else if(!regexName.test(form.name.trim())){
+            newErrors.name='El campo nombre solo acepta letras, numeros, guion y guion bajo '
         }
+
+        if(!form.email.trim()){
+            newErrors.email = "El campo email es requerido";
+        }else if(!regexEmail.test(form.email.trim())){
+            newErrors.email='El campo email es incorrecto '
+        }
+
+        if(!form.password.trim()){
+            newErrors.password = "El campo password es requerido";
+        }else if(!regexPass.test(form.password.trim())){
+            newErrors.password='El campo nombre password debe contener de 4 a 12 digitos '
+        }
+
         return newErrors
     };
 
