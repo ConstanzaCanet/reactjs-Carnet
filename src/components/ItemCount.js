@@ -49,7 +49,13 @@ function ItemCount({name , id , stock, listPrice}) {
                 setCount((prevState)=> prevState - 1)
          }
       };
-
+      const valido=(datos,id,name,count,listPrice)=>{
+        if (datos.name=== undefined) {
+           return alert('debes loguearte primero')
+        }else{
+            return isInCart(id,name,count,listPrice)
+        }
+      }
     //Retorno elementos,componentes y funciones
     return (
         <div className='container'>
@@ -65,7 +71,7 @@ function ItemCount({name , id , stock, listPrice}) {
                 </ButtonGroup>
 
                 <Card.Body className='buttCoutn'>
-                    <Button variant="success" onClick={()=> isInCart(id,name,count,listPrice) } title='doble-click'>Finalizar</Button> 
+                    <Button variant="success" onClick={()=> valido(datos,id,name,count,listPrice)} title='doble-click'>Finalizar</Button> 
                 </Card.Body>
             </div>
         </div>

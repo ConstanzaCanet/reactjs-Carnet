@@ -4,21 +4,11 @@ const ContextUser = React.createContext({})
 ContextUser.displayName = "ContextUser"; 
 
 export const UserProvider = ({ children }) =>{
-    const [datos, setDatos] = React.useState({
-        name:"",
-        email:"",
-        password:""
-     });
+    const [datos, setDatos] = React.useState({});
 
      
-    const handleInputChange =(event)=>{
-        setDatos({
-            ...datos,
-            [event.target.name] : event.target.value
-        })
-    }
 
-     const cosas={datos,setDatos,handleInputChange}
+     const cosas={datos,setDatos}
      return <ContextUser.Provider value={cosas}> {children} </ContextUser.Provider>
 }
 

@@ -1,10 +1,15 @@
 import { useState } from "react";
+import { useUser } from "../../context/ContextUser";
+import swal from "sweetalert";
 
 export const useForm = (initialForm, validateForm)=>{
     const [form , setForm ] = useState(initialForm);
     const [errors,setErrors] = useState({});
     const [loading ,setLoading] = useState(false);
     const [respon, setResp] = useState(null);
+
+    /*determino contexto global dentro del hook */
+    const{datos, setDatos}=useUser();
 
     /* crea y actualiza elemento modificado */
     const handleChange=(e)=>{
@@ -13,6 +18,8 @@ export const useForm = (initialForm, validateForm)=>{
             ...form,
             [name]:value
         });
+
+        setDatos(form);
     };
 
     /*valida estados y valores del formulario*/
@@ -21,7 +28,30 @@ export const useForm = (initialForm, validateForm)=>{
         setErrors(validateForm(form)); 
     }
 
-    const handleSubmit=(e)=>{};
+    const handleSubmit=(e)=>{
+        e.preventDefault();
+        setErrors(validateForm(form));
+
+        if(Object.keys(errors).length === 0){
+                swal({
+                    title:'Bienvenido',
+                    text: 'Ingresando...',
+                    icon:'success',
+                    timer: 2000,
+                 })
+
+
+        }else{
+            return(
+                swal({
+                    title:'Upss!',
+                    text: 'Algun valor no es correcto!',
+                    icon:'error',
+                    timer: 2000,
+                 })
+            )
+        }
+    };
 
     return({
         form,
