@@ -25,8 +25,12 @@ const Input = ({onChange, label, placeholder,name,tipo,error,onBlur,value})=>{
                 required
             />
             <div>
-                <FontAwesomeIcon icon={faExclamationCircle} className='iconForm' />
-                <p className='errorForm'>{error}</p>
+                {error&&
+                    <div>
+                        <FontAwesomeIcon icon={faExclamationCircle} className='iconForm' />
+                        <p className='errorForm'>{error}</p>
+                    </div>
+                }
             </div>
           
         </Form.Group>

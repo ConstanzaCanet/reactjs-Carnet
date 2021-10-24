@@ -4,9 +4,8 @@ import {Button,Form} from 'react-bootstrap';
 import  imgBook  from '../components/img/images.png'
 import { useForm } from '../components/hook/useForm';
 import Input from '../components/Input';
-import { Link } from "react-router-dom";
 
-    /*Valor inicial de formulario, dejo definido para evitar errores */
+/*Valor inicial de formulario, dejo definido para evitar errores */
     const initialForm={
         name:"",
         email:"",
@@ -35,7 +34,7 @@ import { Link } from "react-router-dom";
         if(!form.password.trim()){
             newErrors.password = "El campo password es requerido";
         }else if(!regexPass.test(form.password.trim())){
-            newErrors.password='El campo nombre password debe contener de 4 a 12 digitos '
+            newErrors.password='El campo password debe contener de 4 a 12 digitos '
         }
 
         return newErrors
@@ -74,8 +73,9 @@ const Login=()=>{
                             name='name' 
                             placeholder='Enter User name' 
                             tipo='text'
+                            error={errors.name}
                         />
-                        {errors.name&&<p style={{color:'red'}}>{errors.name}</p>}
+
                         <Input 
                             onChange={handleChange}
                             onBlur={handleBlur}
@@ -84,8 +84,9 @@ const Login=()=>{
                             name='email' 
                             placeholder='Enter email' 
                             tipo='email'
+                            error={errors.email}
                         />
-                        {errors.email&&<p style={{color:'red'}}>{errors.email}</p>}
+
                         <Input
                             onChange={handleChange}
                             onBlur={handleBlur}
@@ -94,8 +95,9 @@ const Login=()=>{
                             name='password' 
                             placeholder='Password' 
                             tipo='password'
+                            error={errors.password}
                         />
-                    {errors.password&&<p style={{color:'red'}}>{errors.password}</p>}
+
                         <Form.Group className="mb-5" controlId="formBasicCheckbox">
                             <Form.Check 
                                 type="checkbox" 
@@ -103,12 +105,14 @@ const Login=()=>{
                                 className='checkBox' 
                                 />
                         </Form.Group>
-                        {!errors.email&&
-                        <Link to= '/'>
-                        <Button variant="primary" type='submit' className='mt-2'>
+                        
+                        {!errors.email? 
+                            <Button variant="primary" type='submit' className='mt-2'>
+                                Login
+                            </Button>
+                            : <Button variant="primary" type='submit' className='mt-2' disabled>
                             Login
                         </Button>
-                        </Link>
                         }
                     </Form>
                     </div>

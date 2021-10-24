@@ -1,6 +1,9 @@
 import { useState } from "react";
+import { useHistory } from "react-router-dom";
 import { useUser } from "../../context/ContextUser";
 import swal from "sweetalert";
+
+
 
 export const useForm = (initialForm, validateForm)=>{
     const [form , setForm ] = useState(initialForm);
@@ -8,8 +11,10 @@ export const useForm = (initialForm, validateForm)=>{
     const [loading ,setLoading] = useState(false);
     const [respon, setResp] = useState(null);
 
-    /*determino contexto global dentro del hook */
-    const{datos, setDatos}=useUser();
+    /*Envio context y redirecciono a la pagina principal*/
+    const history = useHistory();
+    const{ datos, setDatos } = useUser();
+    
 
     /* crea y actualiza elemento modificado */
     const handleChange=(e)=>{
@@ -18,7 +23,6 @@ export const useForm = (initialForm, validateForm)=>{
             ...form,
             [name]:value
         });
-
         setDatos(form);
     };
 
@@ -40,7 +44,7 @@ export const useForm = (initialForm, validateForm)=>{
                     timer: 2000,
                  })
 
-
+                 history.push("/");
         }else{
             return(
                 swal({

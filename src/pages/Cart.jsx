@@ -4,6 +4,7 @@ import {Button,Table,Alert,Spinner} from 'react-bootstrap';
 import CartDetail from '../components/CartDetail';
 import '../App.css';
 import { useCart } from "../context/ContextCart";
+import { useUser } from "../context/ContextUser";
 import { getFirestore } from "../firebase";
 
 import swal from "sweetalert";
@@ -16,6 +17,7 @@ const Cart=()=>{
     const {cart , clear ,cantidad, totalMoney,setCart}=useCart();
     /*rendering*/
     const [loading , setLoading] = React.useState(true);
+    const{ datos } =useUser();
 
     React.useEffect(() => {
         setTimeout(() => setLoading(false), 2000)
@@ -34,7 +36,7 @@ const Cart=()=>{
 
     /*Boton Finalizar,firestore*/
     const newOrder ={
-        buyer: {name: 'Juancito', phone:3514698746, email:'SabraDios@gmail.com' },
+        buyer: {name: datos.name , email: datos.email },
         items: cart,
         total: totalMoney(),
         date: firebase.firestore.FieldValue.serverTimestamp(),

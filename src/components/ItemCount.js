@@ -14,6 +14,7 @@ function ItemCount({name , id , stock, listPrice}) {
     
     let refBuy = useRef(),
     refBuyBtn = useRef();
+    
 
     const handleBuyRef = (e)=>{
         if(refBuyBtn.current.textContent === 'Adquirir'){
@@ -51,7 +52,14 @@ function ItemCount({name , id , stock, listPrice}) {
       };
       const valido=(datos,id,name,count,listPrice)=>{
         if (datos.name=== undefined) {
-           return alert('debes loguearte primero')
+           return (
+            swal({
+                title:'Debes registrarte primero',
+                text: `para obtener el producto necesitamos saber quier eres`,
+                icon:'warning',
+                button: 'Aceptar',
+                timer: 2000})
+           )
         }else{
             return isInCart(id,name,count,listPrice)
         }
