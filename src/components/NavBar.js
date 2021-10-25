@@ -1,14 +1,15 @@
 import * as React from 'react';
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Navbar,Nav,NavDropdown,Container,Form,FormControl,Button } from 'react-bootstrap';
+import { Navbar,Nav,NavDropdown,Container,Form,Button } from 'react-bootstrap';
 import carro from './img/carro.png'
 import usuario from './img/usuario.png'
 import logo from './img/book.jpg'
 import { Link } from "react-router-dom";
 import { useCart } from '../context/ContextCart';
-
-
+import { useUser  } from '../context/ContextUser';
+import { useHistory } from "react-router-dom";
+import swal from "sweetalert";
 
 export const NavBar = () => {
 
@@ -21,10 +22,30 @@ export const NavBar = () => {
     const ciencias = 'Science';
 
 
-    const {cart , cantidad}=useCart();
+    const { cantidad }=useCart();
+    const { datos } = useUser();
+    const history = useHistory();
 
+    const salir =(e)=>{
+        swal({
+            title:'¿Quieres finalizar la sesion?',
+            icon:'warning',
+            buttons: ["No","Si"]
+        }).then(request =>{
+            if (request) {
+                swal({
+                    title:'Sesion finalizada',
+                    icon: "success",
+                    buttons:'Aceptar',
+                    timer: 2000
+                })
+                history.push("/");
+                window.location.reload(false);
+            }
+        })
+    }
 
-
+   
     return (
         <div>
 
@@ -62,21 +83,22 @@ export const NavBar = () => {
                     </Nav>
                     <Nav>
                        
-                            <Form className="d-flex">
-                                <FormControl
-                                type="search"
-                                placeholder="Search"
-                                className="mr-0"
-                                aria-label="Search"
-                                />
-                                <Button variant="outline-danger">Search</Button>
-                                <Link to='/cart' className='link'>
-                                    <p className='numProducts'>{cantidad()}</p>
-                                    <Button variant="dark"><img src={carro} alt="carrito"/></Button>
-                                </Link>
-                                <Link to='/login' className='link'>
-                                    <Button variant="dark"><img src={usuario} alt="login" className='nabBot'/></Button>
-                                </Link>
+                            <Form>
+                                {datos.name && datos.email? 
+                                  <div className='presente'>
+                                    <Link to='/cart' className='link'>
+                                        <p className='numProducts'>{cantidad()}</p>
+                                        <Button variant="dark"><img src={carro} alt="carrito"/></Button>
+                                    </Link>                              
+                                   <Button variant="dark" onClick={salir}><img src={usuario} alt="login"/></Button>
+                                  </div>
+
+                                    :
+                                    <Link to='/login' className='link'>
+                                        <Button variant="dark"><img src={usuario} alt="login" className="nabBot"/></Button>
+                                    </Link>
+                                    }
+
                             </Form>
                        
                     </Nav>

@@ -61,6 +61,13 @@ body{
 .categoriesItems li:hover{
     background-color: rgb(119, 119, 119);
 }
+.nabBot{
+    filter: invert(1); 
+}
+.presente{
+
+    flex-direction: row;
+}
 /*Contenedor de Cards---> en  CardContainer.js*/
 .divCard{
     margin: auto;
