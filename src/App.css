@@ -91,6 +91,12 @@ body{
     transition: all 250ms ease-in-out
 }
 
+.carritoTitu{
+    background-color: rgb(27, 27, 27);
+    color: rgb(255, 255, 255);
+    padding: 2%;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
 
 .CatalogoCard{
     margin: 1.3rem 1.3em 0rem auto;

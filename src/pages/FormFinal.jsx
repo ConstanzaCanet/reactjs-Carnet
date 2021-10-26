@@ -2,48 +2,70 @@ import *as React from "react";
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Form, Table, Button } from 'react-bootstrap';
-import { useState } from 'react';
 import { useCart } from '../context/ContextCart';
 import { useUser } from "../context/ContextUser";
 import { getFirestore } from "../firebase";
 import "firebase/compat/firestore";
 import swal from "sweetalert";
 import firebase from 'firebase/compat/app';
+import { useHistory } from "react-router-dom";
+import Select from 'react';
 
+const option=[
+    {value:1, label:1},
+    
+]
 const FormFinal=()=>{
-    const { totalMoney, setCart, cart } = useCart();
+    
+    const [ pago, setPago ] = React.useState("");
+    const [ desableT, setdesableT ] = React.useState(false);
+    const [ desableC, setdesableC ] = React.useState(false);
+    const [loading , setLoading] = React.useState(true);
+    const [ cuotas,setCuotas ] = React.useState();
+    const [ valor, setValor ] = React.useState();
+
+    /*Navegacion */
+    const history = useHistory();
+
+    /*Context*/
+    const { totalMoney, setCart, cart} = useCart();
     const { datos } = useUser();
 
-    const [ pago, setPago ] = useState("");
-    const [ desableT, setdesableT ] = useState(false);
-    const [ desableC, setdesableC ] = useState(false);
+    /*rendering de la pagina */
+    React.useEffect(() => {
+        setTimeout(() => setLoading(false), 2000)
+    }, []);
 
-    const [ cuotas,setCuotas ] = useState();
-
-    const cuotasMoney=()=>{
-        const  total = (totalMoney())
-        const totalIva= 0.1*total
-        const pagomensual= Number(totalIva/3)
-        return pagomensual
-    }
-
+    /*Habilitar o no cierta funcion con checkbox */
     const onChangeT=()=>{
         setPago("Tarjeta")
-        setdesableC(prev => !prev)
-    }
-
+        return setdesableC(prev => !prev)
+    };
+    
     const onChangeC=()=>{
         setPago("CBU/CVU")
-        setdesableT(prev => !prev)
-    }
-
+        return setdesableT(prev => !prev)
+    };
     
+    /*Calculo de cuotas + el iva */
+    const cuotasMoney=(event)=>{
+        console.log(event.currentTarget.value)
+        if (cuotas === 1) {
+            setValor(totalMoney());
+        }else{
+            const  total = (totalMoney());
+            const totalIva= ((0.1*total) + total);
+            const pagomensual= (totalIva/cuotas);
+            return setValor(pagomensual);
+        }
+    };
     /*Boton Finalizar,firestore*/
     const newOrder ={
         buyer: {name: datos.name , email: datos.email },
         items: cart,
         total: totalMoney(),
         date: firebase.firestore.FieldValue.serverTimestamp(),
+        pago:{ cuotas: cuotas, valor: valor }
     }
 
 
@@ -69,6 +91,7 @@ const FormFinal=()=>{
                     timer: 2000})
                     
                     setCart([])
+                    return history.push('/');
             }else{
                 return console.log('sigue con su compra')
             }
@@ -84,7 +107,7 @@ const FormFinal=()=>{
                 <h2>Formulario de Pago</h2>
                 <p>Datos de pago</p>
             </div>
-            <Form>
+
 
             <Form.Group className="mb-5" controlId="formBasicCheckbox">
                 <Form.Check 
@@ -121,23 +144,22 @@ const FormFinal=()=>{
                     <tr>
                         <td>
                             
-                            <Form.Select aria-label="Default select example">
+                            <Form.Select onChange={cuotasMoney} aria-label="Default select example">
                                 <option>Cuotas</option>
-                                <option value="1">One</option>
-                                <option value="3">Two</option>
-                                <option value="12">Three</option>
+                                <option value="1">Una</option>
+                                <option value="3">Tres</option>
+                                <option value="6">Seis</option>
+                                <option value="12">Doce</option>
                             </Form.Select>
 
                         </td>
-                        <td>Cada cuota a:{cuotasMoney()}</td>
+                        <td>Cada cuota a: ${valor}</td>
+
                     </tr>
                 </tbody>    
             </Table>
             </div>
-            <Button variant="success" className='m-2'> Finalizar</Button>
-            </Form>
-
-
+            <Button variant="success" className='m-2' onClick={handleCheckout}> Finalizar</Button>
         </Form>
         </div>
 

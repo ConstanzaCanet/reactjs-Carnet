@@ -4,18 +4,18 @@ import {Button,Table,Alert,Spinner} from 'react-bootstrap';
 import CartDetail from '../components/CartDetail';
 import '../App.css';
 import { useCart } from "../context/ContextCart";
-import { useUser } from "../context/ContextUser";
 import { useHistory } from "react-router-dom";
 import "firebase/compat/firestore";
+import swal from "sweetalert";
 
-
-/*Aqui mostraria el carrito---- */
+/*Carrito---- */
 const Cart=()=>{
     const {cart , clear ,cantidad, totalMoney}=useCart();
     /*rendering*/
     const [loading , setLoading] = React.useState(true);
-    const{ datos } =useUser();
+    /*Navegacion */
     const history = useHistory();
+
 
     React.useEffect(() => {
         setTimeout(() => setLoading(false), 2000)
@@ -32,21 +32,34 @@ const Cart=()=>{
         )
     }
 
+    const irFormFinal=()=>{
+        swal({
+            title:'¿Seguro no necesitas nada más?',
+            text: `Procederas al pago de tu compra`,
+            icon:'warning',
+            buttons: ["No","Si"]
+        }).then(request =>{
+            if (request) {
+               return history.push('/finalForm');
+            }})
+    }
+
 
     return(
         <>
             {loading && <Spinner animation="grow" variant="info" style={{width: '6rem', height: '6rem', marginTop:'15%'}}/> }
 
             {!loading &&
-             <div className='container' style={{marginTop:'10%'}}>AQUI MOSTRARIA EL CARRITO
-             <Table striped bordered hover variant="dark">
-                 <thead>
+             <div className='container' style={{marginTop:'10%'}}>
+                <h2 className='carritoTitu mb-0'>CARRITO DE COMPRAS</h2>
+                <Table striped bordered hover variant="dark">
+                  <thead>
                      <tr>
                          <th>Producto</th>
                          <th>Unidades</th>
                          <th>Precio x unid.</th>
                      </tr>
-                 </thead>
+                  </thead>
       
                  <CartDetail />
              
@@ -57,7 +70,7 @@ const Cart=()=>{
                          <td>
                          <Button value="X" variant="dark" style={{width: '15rem'}}>${totalMoney()}</Button>
                          <br />
-                             <Button variant="success" className='m-2' onClick= {()=>{history.push('/finalForm');}}> Finalizar</Button>
+                             <Button variant="success" className='m-2' onClick= {irFormFinal}> Finalizar</Button>
                              <Button variant="danger" onClick={clear}> Cancelar</Button>
                          </td>
                      </tr>

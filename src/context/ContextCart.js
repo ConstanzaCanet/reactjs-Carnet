@@ -100,8 +100,11 @@ export const CartProvider= ({ children }) =>{
         })
         return total;
     }
+    
 
-    const cosas={ cart, setCart,addItem, isInCart, removeItem, clear, cantidad,totalMoney }
+
+
+    const cosas={ cart, setCart,addItem, isInCart, removeItem, clear, cantidad, totalMoney }
     return <ContextCart.Provider  value={cosas}> {children} </ContextCart.Provider>;
 };
 
