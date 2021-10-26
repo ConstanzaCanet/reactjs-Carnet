@@ -53,14 +53,17 @@ function ItemCount({name , id , stock, listPrice}) {
       const valido=(datos,id,name,count,listPrice)=>{
         if (datos.name=== undefined) {
            return (
-            swal({
-                title:'Debes registrarte primero',
-                text: `para obtener el producto necesitamos saber quier eres`,
-                icon:'warning',
-                button: 'Aceptar',
-                timer: 2000})
+               swal({
+                   title:'Debes registrarte primero',
+                   text: `para obtener el producto necesitamos saber quier eres`,
+                   icon:'warning',
+                   button: 'Aceptar',
+                   timer: 2000}
+                   )
            )
         }else{
+            refBuy.current.style.display='none';
+            refBuyBtn.current.textContent= 'Adquirir';
             return isInCart(id,name,count,listPrice)
         }
       }

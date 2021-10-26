@@ -1,9 +1,9 @@
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Button,Form} from 'react-bootstrap';
+import Input from '../components/Input';
 import  imgBook  from '../components/img/images.png'
 import { useForm } from '../components/hook/useForm';
-import Input from '../components/Input';
 
 /*Valor inicial de formulario, dejo definido para evitar errores */
     const initialForm={
@@ -46,8 +46,6 @@ const Login=()=>{
     const {
         form,
         errors,
-        loading,
-        respon,
         handleSubmit,
         handleChange,
         handleBlur,
@@ -102,7 +100,8 @@ const Login=()=>{
                             <Form.Check 
                                 type="checkbox" 
                                 label="Acepto terminos y condiciones" 
-                                className='checkBox' 
+                                className='checkBox'
+                                required
                                 />
                         </Form.Group>
                         

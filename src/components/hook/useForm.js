@@ -8,8 +8,7 @@ import swal from "sweetalert";
 export const useForm = (initialForm, validateForm)=>{
     const [form , setForm ] = useState(initialForm);
     const [errors,setErrors] = useState({});
-    const [loading ,setLoading] = useState(false);
-    const [respon, setResp] = useState(null);
+
 
     /*Envio context y redirecciono a la pagina principal*/
     const history = useHistory();
@@ -60,8 +59,6 @@ export const useForm = (initialForm, validateForm)=>{
     return({
         form,
         errors,
-        loading,
-        respon,
         handleSubmit,
         handleChange,
         handleBlur,

@@ -10,6 +10,7 @@ import ProductoDetail from './pages/ProductoDetail';
 import Cart from './pages/Cart';
 import CardContainers from './components/CardContainers';
 import Login from './pages/Login';
+import FormFinal from './pages/FormFinal';
 
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
           <Route exact path="/container/:id" component={CardContainers} />
           <Route exact path="/product/:id" component={ProductoDetail} />
           <Route exact path="/cart" component={Cart}/>
+          <Route exact path="/finalForm" component ={FormFinal}/>
           <Route path="*" component={NotFound} />
         </Switch>
 
