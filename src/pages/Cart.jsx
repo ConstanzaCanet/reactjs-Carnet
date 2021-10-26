@@ -5,19 +5,17 @@ import CartDetail from '../components/CartDetail';
 import '../App.css';
 import { useCart } from "../context/ContextCart";
 import { useUser } from "../context/ContextUser";
-import { getFirestore } from "../firebase";
-
-import swal from "sweetalert";
-import firebase from 'firebase/compat/app';
+import { useHistory } from "react-router-dom";
 import "firebase/compat/firestore";
 
 
 /*Aqui mostraria el carrito---- */
 const Cart=()=>{
-    const {cart , clear ,cantidad, totalMoney,setCart}=useCart();
+    const {cart , clear ,cantidad, totalMoney}=useCart();
     /*rendering*/
     const [loading , setLoading] = React.useState(true);
     const{ datos } =useUser();
+    const history = useHistory();
 
     React.useEffect(() => {
         setTimeout(() => setLoading(false), 2000)
@@ -32,44 +30,6 @@ const Cart=()=>{
                 </p>
             </Alert>
         )
-    }
-
-    /*Boton Finalizar,firestore*/
-    const newOrder ={
-        buyer: {name: datos.name , email: datos.email },
-        items: cart,
-        total: totalMoney(),
-        date: firebase.firestore.FieldValue.serverTimestamp(),
-    }
-
-
-    const handleCheckout=()=>{
-        const dataBase = getFirestore();
-        const ordersCollection= dataBase.collection('orders');
-        swal({
-            title:'Ya casi es tuyo!',
-            text: `¿Finalizas aqui tu compra?`,
-            icon:'info',
-            buttons: ["No","Si"]
-        }).then(request =>{
-            if (request) {
-                ordersCollection
-                    .add(newOrder)
-                    .then((docRef) => console.log('Se cerro compra!', docRef.id))
-                    .catch((error) => console.log(error));
-
-                swal({
-                    title:'Compra exitosa!',
-                    icon:'success',
-                    button: 'Aceptar',
-                    timer: 2000})
-                    
-                    setCart([])
-            }else{
-                return console.log('sigue con su compra')
-            }
-        })
-       
     }
 
 
@@ -97,7 +57,7 @@ const Cart=()=>{
                          <td>
                          <Button value="X" variant="dark" style={{width: '15rem'}}>${totalMoney()}</Button>
                          <br />
-                             <Button variant="success" className='m-2' onClick= {handleCheckout}> Finalizar</Button>
+                             <Button variant="success" className='m-2' onClick= {()=>{history.push('/finalForm');}}> Finalizar</Button>
                              <Button variant="danger" onClick={clear}> Cancelar</Button>
                          </td>
                      </tr>

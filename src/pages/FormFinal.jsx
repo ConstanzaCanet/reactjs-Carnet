@@ -3,10 +3,16 @@ import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Form, Table, Button } from 'react-bootstrap';
 import { useState } from 'react';
-import { useCart } from '../context/ContextCart'
+import { useCart } from '../context/ContextCart';
+import { useUser } from "../context/ContextUser";
+import { getFirestore } from "../firebase";
+import "firebase/compat/firestore";
+import swal from "sweetalert";
+import firebase from 'firebase/compat/app';
 
 const FormFinal=()=>{
-    const { totalMoney } = useCart();
+    const { totalMoney, setCart, cart } = useCart();
+    const { datos } = useUser();
 
     const [ pago, setPago ] = useState("");
     const [ desableT, setdesableT ] = useState(false);
@@ -30,6 +36,46 @@ const FormFinal=()=>{
         setPago("CBU/CVU")
         setdesableT(prev => !prev)
     }
+
+    
+    /*Boton Finalizar,firestore*/
+    const newOrder ={
+        buyer: {name: datos.name , email: datos.email },
+        items: cart,
+        total: totalMoney(),
+        date: firebase.firestore.FieldValue.serverTimestamp(),
+    }
+
+
+    const handleCheckout=()=>{
+        const dataBase = getFirestore();
+        const ordersCollection= dataBase.collection('orders');
+        swal({
+            title:'Ya casi es tuyo!',
+            text: `¿Finalizas aqui tu compra?`,
+            icon:'info',
+            buttons: ["No","Si"]
+        }).then(request =>{
+            if (request) {
+                ordersCollection
+                    .add(newOrder)
+                    .then((docRef) => console.log('Se cerro compra!', docRef.id))
+                    .catch((error) => console.log(error));
+
+                swal({
+                    title:'Compra exitosa!',
+                    icon:'success',
+                    button: 'Aceptar',
+                    timer: 2000})
+                    
+                    setCart([])
+            }else{
+                return console.log('sigue con su compra')
+            }
+        })
+       
+    }
+
     return(
 
         <div className='formFinal m-5'>
