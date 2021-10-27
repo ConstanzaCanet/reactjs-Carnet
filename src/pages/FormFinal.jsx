@@ -49,13 +49,15 @@ const FormFinal=()=>{
     
     /*Calculo de cuotas + el iva */
     const cuotasMoney=(event)=>{
-        console.log(event.currentTarget.value)
-        if (cuotas === 1) {
-            setValor(totalMoney());
-        }else{
+        const eventoSelect= Number(event.currentTarget.value)
+        if (eventoSelect == 1) {
+            setCuotas(eventoSelect);
+            return setValor(totalMoney());
+        }else if(eventoSelect>1){
             const  total = (totalMoney());
             const totalIva= ((0.1*total) + total);
-            const pagomensual= (totalIva/cuotas);
+            const pagomensual= (totalIva/eventoSelect);
+            setCuotas(eventoSelect);
             return setValor(pagomensual);
         }
     };
@@ -65,7 +67,7 @@ const FormFinal=()=>{
         items: cart,
         total: totalMoney(),
         date: firebase.firestore.FieldValue.serverTimestamp(),
-        pago:{ cuotas: cuotas, valor: valor }
+        pago:{valor:valor, cuotas:cuotas}
     }
 
 
@@ -101,32 +103,34 @@ const FormFinal=()=>{
 
     return(
 
-        <div className='formFinal m-5'>
-        <Form className='m-5'>
+        <div className='m-5'>
+        <Form className='m-5 container formFinal'onSubmit={handleCheckout}>
             <div className='border-bottom'>
                 <h2>Formulario de Pago</h2>
                 <p>Datos de pago</p>
             </div>
 
 
-            <Form.Group className="mb-5" controlId="formBasicCheckbox">
+            <Form.Group className="mb-2 pagoForrma" controlId="formBasicCheckbox">
                 <Form.Check 
                 aria-label="option 1" 
                 label="Tarjeta"
                 onClick={onChangeT}
                 disabled={desableT}
+                className='m-3'
                 />
                 <Form.Check 
                 aria-label="option 1"
                 label="CBU"
                 onClick={onChangeC}
                 disabled={desableC} 
+                className='m-3'
                 />
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>{pago}</Form.Label>
-                <Form.Control type="number" placeholder={pago} className='formaPago'/>
+                <Form.Control type="number" placeholder={pago} className='formaPago' required/>
             </Form.Group>
 
             <div>
@@ -159,7 +163,7 @@ const FormFinal=()=>{
                 </tbody>    
             </Table>
             </div>
-            <Button variant="success" className='m-2' onClick={handleCheckout}> Finalizar</Button>
+            <Button variant="success" className='m-2' type='submit'> Finalizar</Button>
         </Form>
         </div>
 

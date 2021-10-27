@@ -260,6 +260,11 @@ input::-webkit-inner-spin-button {
     background-color:rgb(14, 13, 13);
     color:aliceblue;
     font-weight: lighter;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+}
+.pagoForrma{
+    width: 10%;
+    margin-left: 45%;
 }
 .tituFinal{
     border-bottom: aliceblue;
