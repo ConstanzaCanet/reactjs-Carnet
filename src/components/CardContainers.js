@@ -32,7 +32,7 @@ const CardContainers = () =>{
       })
       .catch((error)=>setError(error))
       .finally(()=> setLoad(false))
-    },[[],libros]);
+    },[id]);
 
     return(
       <div className='divCard'>
