@@ -50,7 +50,7 @@ const FormFinal=()=>{
     /*Calculo de cuotas + el iva */
     const cuotasMoney=(event)=>{
         const eventoSelect= Number(event.currentTarget.value)
-        if (eventoSelect == 1) {
+        if (eventoSelect === 1) {
             setCuotas(eventoSelect);
             return setValor(totalMoney());
         }else if(eventoSelect>1){
@@ -71,7 +71,8 @@ const FormFinal=()=>{
     }
 
 
-    const handleCheckout=()=>{
+    const handleCheckout=(e)=>{
+        e.preventDefault()
         const dataBase = getFirestore();
         const ordersCollection= dataBase.collection('orders');
         swal({
